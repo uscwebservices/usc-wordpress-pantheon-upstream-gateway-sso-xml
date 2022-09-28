@@ -34,6 +34,18 @@ function getSite(data, type) {
 
 }
 
+function isObject(val) {
+    if (val === null) {
+        return false;
+    }
+
+    return typeof val === 'object';
+}
+
+function nestedObject(obj) {
+
+}
+
 
 async function allSites() {
     console.log('calling');
@@ -51,6 +63,10 @@ async function allSites() {
     // console.log(strJSON);
     // console.log(typeof(strJSON));
 
+    // for (const key in strJSON) {
+
+    // }
+
 
 
     // for (const key in strJSON) {
@@ -59,21 +75,34 @@ async function allSites() {
     //     }
     // }
 
-    const isObject = (val) => {
-        if (val === null) {
-            return false;
-        }
+    // for (const [key, value] of Object.entries(strJSON)) {
+    //     console.log(`${key}: ${value}`);
+    // }
 
-        return typeof val === 'object';
-      };
+    // const isObject = (val) => {
+    //     if (val === null) {
+    //         return false;
+    //     }
+
+    //     return typeof val === 'object';
+    //   };
+
+    let names = [];
+    let ids = [];
 
     const nestedObject = (obj) => {
       for (const key in obj) {
           if (isObject(obj[key])) {
               nestedObject(obj[key]);
           } else {
-              console.log(`${key} => ${obj[key]}`);
+            //   console.log(`${key} => ${obj[key]}`);
             //   console.log(typeof(key));
+            if ( 'name' === key ) {
+                names.push(obj[key]);
+            }
+            if ( 'id' === key ) {
+                ids.push(obj[key]);
+            }
 
           }
       }
@@ -81,20 +110,8 @@ async function allSites() {
 
     nestedObject(strJSON);
 
-
-    // const iterate = (obj) => {
-    //     Object.keys(obj).forEach(key => {
-
-    //     console.log(`${key}: ${obj[key]}`)
-
-    //     if (typeof obj[key] === 'object' && obj[key] !== null) {
-    //             iterate(obj[key])
-    //         }
-    //     })
-
-    // }
-
-    // iterate(strJSON);
+    console.log(names);
+    console.log(ids);
 }
 
 allSites();
