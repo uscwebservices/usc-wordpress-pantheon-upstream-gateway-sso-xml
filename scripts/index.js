@@ -28,7 +28,7 @@ async function orgSiteList() {
  */
 async function siteEnvironments(siteID) {
 	return new Promise(resolve => {
-		resolve( exec(`terminus env:list --field=domain --format=json ${siteID}`) );
+		resolve( exec(`terminus env:list --fields=domain --format=json ${siteID}`) );
 	});
 }
 
@@ -77,11 +77,44 @@ async function allSites() {
 
 	}
 
-	console.log(names);
-	console.log(ids);
 
+	// Get domains associated with live environments
+	for (const name of names) {
+		const result = await siteDomains(name);
 
-	// Get individual environments
+		if (false !== result.stderr) {
+			const siteDomains = JSON.parse(result.stdout);
+
+			const entries = Object.entries(siteDomains);
+
+			for (const entry of entries) {
+				if ( undefined !== entry[1].id ) {
+					domains.push(entry[1].id);
+					console.log(`Adding: ${entry[1].id}`);
+				}
+			}
+		}
+	}
+
+	// Get domains associated with live environments
+	for (const id of ids) {
+		const result = await siteEnvironments(id);
+
+		if (false !== result.stderr) {
+			const siteEnvs = JSON.parse(result.stdout);
+
+			const entries = Object.entries(siteEnvs);
+
+			for (const entry of entries) {
+				if ( undefined !== entry[1].domain ) {
+					environments.push(entry[1].domain);
+					console.log(`Adding: ${entry[1].domain}`);
+				}
+			}
+		}
+	}
+
+	const fullSiteList = domains.concat(environments);
 
 
 }
