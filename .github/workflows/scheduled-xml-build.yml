@@ -3,6 +3,10 @@ on:
   schedule:
     - cron: '0 * * * *'
     # Run every hour
+
+  # Allow workflow to be manually run from the GitHub UI
+  workflow_dispatch:
+
 jobs:
   scheduled_xml:
     name: Check for updates
