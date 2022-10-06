@@ -25,7 +25,7 @@ jobs:
       - name: Set Timestamp
         run: |
           echo 'branch_timestamp<<EOF' >> $GITHUB_ENV
-          date '+%Y-%m-%d-%H-%M-%i-%s' >> $GITHUB_ENV
+          date '+%Y-%m-%d-%H-%M-%S' >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
       - name: Set Oauth config for Github
