@@ -114,7 +114,8 @@ async function allSites() {
 		}
 	}
 
-	const fullSiteList = domains.concat(environments);
+	const fullSiteList = new Object;
+	fullSiteList.sites = domains.concat(environments);
 
 
 }
