@@ -74,7 +74,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.API_TOKEN_GITHUB }}
-          base: master
+          base: main
           branch: autoupdate-${{ env.branch_timestamp }}
           commit-message: 'chore: autoupdate-${{ env.branch_timestamp }}'
           title: Autoupdate Composer Build - ${{ env.branch_timestamp }}
