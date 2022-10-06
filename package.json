@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/uscwebservices/usc-wordpress-pantheon-upstream-gateway-sso-xml/issues"
   },
-  "homepage": "https://github.com/uscwebservices/usc-wordpress-pantheon-upstream-gateway-sso-xml#readme"
+  "homepage": "https://github.com/uscwebservices/usc-wordpress-pantheon-upstream-gateway-sso-xml#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "xmlbuilder2": "^3.0.2"
+  }
 }
