@@ -1,0 +1,69 @@
+name: Scheduled XML Build
+on:
+  schedule:
+    - cron: '0 * * * *'
+    # Run every hour
+jobs:
+  scheduled_xml:
+    name: Check for updates
+    runs-on: ubuntu-latest
+    env:
+      API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      TERMINUS_ORG_ID: ${{ secrets.TERMINUS_ORG_ID }}
+      TERMINUS_ORG_UPSTREAM_ID: ${{ secrets.TERMINUS_ORG_UPSTREAM_ID }}
+      TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN`` }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set Timestamp
+        run: |
+          echo 'branch_timestamp<<EOF' >> $GITHUB_ENV
+          date '+%Y-%m-%d-%H-%M-%i-%s' >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+
+      - name: Set Oauth config for Github
+        run: composer config --global github-oauth.github.com ${{ secrets.API_TOKEN_GITHUB }}
+
+      - name: Set Github User Information
+        run: |
+          git config user.name "Github Actions Bot"
+          git config user.email "<>"
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Install NPM
+        run: npm ci
+
+      - name: Get current sites
+        run: node index.js
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.API_TOKEN_GITHUB }}
+          base: master
+          branch: autoupdate-${{ env.branch_timestamp }}
+          commit-message: 'chore: autoupdate-${{ env.branch_timestamp }}'
+          title: Autoupdate Composer Build - ${{ env.branch_timestamp }}
+          delete-branch: true
+          labels: |
+            automerge
+          body: |
+            Autoupdate to XML
+
+            @uscwebservices/software-engineering-web
+
+  automerge:
+    runs-on: ubuntu-latest
+    needs: [scheduled_xml]
+    steps:
+      - name: automerge
+        uses: 'pascalgn/automerge-action@v0.14.3'
+        env:
+          GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
