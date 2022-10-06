@@ -5,7 +5,7 @@ const { create } = require('xmlbuilder2');
 const fs = require('fs');
 
 // Set variables from shell environment for Organization and Upstream IDs
-const terminusUpstreamID = process.env.TERMINUS_UPSTREAM_ID,
+const terminusUpstreamID = process.env.TERMINUS_ORG_UPSTREAM_ID,
 terminusOrgID = process.env.TERMINUS_ORG_ID;
 
 // Order in which we need to get site information:
