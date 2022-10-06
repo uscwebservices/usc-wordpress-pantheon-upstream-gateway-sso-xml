@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/uscwebservices/usc-wordpress-pantheon-upstream-gateway-sso-xml#readme",
   "dependencies": {
+    "fs": "^0.0.1-security",
     "xmlbuilder2": "^3.0.2"
   }
 }

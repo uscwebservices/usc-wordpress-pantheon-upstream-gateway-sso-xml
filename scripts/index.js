@@ -1,6 +1,8 @@
 // Require utilities
 const util = require('node:util');
 const exec = util.promisify(require('node:child_process').exec);
+const { create } = require('xmlbuilder2');
+const fs = require('fs');
 
 // Set variables from shell environment for Organization and Upstream IDs
 const terminusUpstreamID = process.env.TERMINUS_UPSTREAM_ID,
@@ -45,7 +47,7 @@ async function siteDomains(siteName) {
 }
 
 
-async function allSites() {
+async function allSitesToXML() {
 
 	// Set empty arrays for names and ids
 	let names = [];
@@ -114,10 +116,75 @@ async function allSites() {
 		}
 	}
 
+	// Set data as an Object
 	const fullSiteList = new Object;
 	fullSiteList.sites = domains.concat(environments);
+
+	// Create XML format
+	const root = create({ version: '1.0' })
+		.ele('md:EntitiesDescriptor', {
+				'xmlns:md': 'urn:oasis:names:tc:SAML:2.0:metadata',
+				'xmlns:mdui':'urn:oasis:names:tc:SAML:2.0:metadata:ui',
+				'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+				'xmlns:ds': 'http://www.w3.org/2000/09/xmldsig#',
+				'xsi:schemaLocation': 'urn:oasis:names:tc:SAML:2.0:metadata ../schemas/saml-schema-metadata-2.0.xsd urn:mace:shibboleth:metadata:1.0 ../schemas/shibboleth-metadata-1.0.xsd http://www.w3.org/2000/09/xmldsig# ../schemas/xmldsig-core-schema.xsd',
+				'Name': 'https://www.usc.edu/its/pantheon'
+			})
+		for(let i = 0; i <= (fullSiteList.sites.length - 1); i++) {
+
+			const entityDesc = root.ele('md:EntityDescriptor');
+
+			entityDesc.att('entityID', `urn:${fullSiteList.sites[i]}`)
+				.ele('md:SPSSODescriptor', {
+					'AuthnRequestsSigned': 'false',
+					'WantAssertionsSigned': 'true',
+					'protocolSupportEnumeration': 'urn:oasis:names:tc:SAML:2.0:protocol'
+				})
+					.ele('md:AssertionConsumerService', {
+						'Binding': 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
+						'Location': `https://${fullSiteList.sites[i]}/wp/wp-login.php?action=wp-saml-auth`,
+						'index': `${i}`
+					}).up()
+					.up()
+				.ele('md:Organization')
+					.ele('md:OrganizationName',{
+						'xml:lang': 'en-US',
+					})
+						.txt('USC ITS').up()
+					.ele('md:OrganizationDisplayName',{
+						'xml:lang': 'en-US',
+					})
+						.txt('USC ITS').up()
+					.ele('md:OrganizationURL',{
+						'xml:lang': 'en-US',
+					})
+						.txt('https://itservices.usc.edu').up()
+					.up()
+				.ele('md:ContactPerson',{
+					'contactType': 'technical',
+				})
+					.ele('md:GivenName').txt('USC ITS').up()
+					.ele('me:EmailAddress').txt('itsps@usc.edu').up()
+				.up()
+				.ele('md:ContactPerson',{
+					'contactType': 'support',
+				})
+					.ele('md:GivenName').txt('USC ITS').up()
+					.ele('me:EmailAddress').txt('itsps@usc.edu').up()
+				.up();
+		}
+
+		const xml = root.end({ prettyPrint: true });
+		// console.log(xml);
+
+		// Output XML to file.
+		let full_file_name = "./usc-pantheon-gateway-sso.xml";
+		fs.writeFileSync(full_file_name, xml, function(err) {
+			if (err) throw err;
+		});
 
 
 }
 
-allSites();
+// Fetch all sites and create XML
+allSitesToXML();
