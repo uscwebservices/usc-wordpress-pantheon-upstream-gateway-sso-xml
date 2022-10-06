@@ -49,6 +49,8 @@
       ],
       "@semantic-release/github"
     ],
-    "branch": "main"
+    "branches": [
+      { "name": "main" }
+    ]
   }
 }
