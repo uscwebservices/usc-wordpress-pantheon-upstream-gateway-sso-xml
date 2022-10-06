@@ -1,5 +1,13 @@
-# Created by https://www.toptal.com/developers/gitignore/api/node
-# Edit at https://www.toptal.com/developers/gitignore?templates=node
+# Created by https://www.toptal.com/developers/gitignore/api/node,composer
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,composer
+
+### Composer ###
+composer.phar
+/vendor/
+
+# Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
+# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
+# composer.lock
 
 ### Node ###
 # Logs
@@ -141,4 +149,4 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 
-# End of https://www.toptal.com/developers/gitignore/api/node
+# End of https://www.toptal.com/developers/gitignore/api/node,composer
