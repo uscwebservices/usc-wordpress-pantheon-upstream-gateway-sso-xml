@@ -1,0 +1,38 @@
+{
+    "name": "uscwebservices/usc-wordpress-pantheon-upstream-gateway-sso-xml",
+    "description": "This is a publicly readable XML output of all available sites running on the USC WordPress Pantheon Upsteam Gateway to allow Single Sign-On (SSO) via Shibboleth.",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Jason Cauwels",
+            "email": "cauwels@usc.edu"
+        }
+    ],
+    "repositories": {
+        "0": {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    },
+    "require-dev": {
+        "pantheon-systems/terminus": "^2.5"
+    },
+    "scripts": {
+        "remove-git-submodules": "find . -mindepth 2 -type d -name .git | xargs rm -rf",
+        "pre-install-cmd": [
+            "mkdir -p $HOME/.terminus/plugins"
+        ],
+        "post-install-cmd": [
+            "@remove-git-submodules"
+        ],
+        "post-update-cmd": [
+            "@remove-git-submodules"
+        ],
+        "post-create-project-cmd": []
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}

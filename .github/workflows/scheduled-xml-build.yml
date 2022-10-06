@@ -44,6 +44,29 @@ jobs:
       - name: Install NPM
         run: npm ci
 
+      - name: Setup PHP with tools
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer:v2
+
+      - name: Set Oauth config for Github
+        run: composer config --global github-oauth.github.com ${{ secrets.API_TOKEN_GITHUB }}
+
+      - name: Set Github User Information
+        run: |
+          git config user.name "Github Actions Bot"
+          git config user.email "<>"
+
+      - name: Install Composer Dependencies
+        run: composer install --prefer-dist
+
+      - name: Export Path to Terminus
+        run: echo "$GITHUB_WORKSPACE/vendor/pantheon-systems/terminus/bin" >> $GITHUB_PATH
+
+      - name: Terminus authentication
+        run: terminus -n auth:login --machine-token=${{ secrets.TERMINUS_TOKEN }}
+
       - name: Get current sites
         run: node index.js
 
