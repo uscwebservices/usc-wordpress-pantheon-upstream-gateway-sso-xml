@@ -37,7 +37,7 @@ jobs:
           git config user.email "<>"
 
       - name: Setup Node
-        uses: actions/setup-node@v1compo
+        uses: actions/setup-node@v1
         with:
           node-version: 16
 
