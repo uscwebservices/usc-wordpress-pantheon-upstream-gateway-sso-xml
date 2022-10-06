@@ -1,5 +1,8 @@
 # USC WordPress Pantheon Upsteam Gateway SSO XML
 
+[![Scheduled XML Build](https://github.com/uscwebservices/usc-wordpress-pantheon-upstream-gateway-sso-xml/actions/workflows/scheduled-xml-build.yml/badge.svg)](https://github.com/uscwebservices/usc-wordpress-pantheon-upstream-gateway-sso-xml/actions/workflows/scheduled-xml-build.yml)
+[![Create Release](https://github.com/uscwebservices/usc-wordpress-pantheon-upstream-gateway-sso-xml/actions/workflows/create-release.yml/badge.svg)](https://github.com/uscwebservices/usc-wordpress-pantheon-upstream-gateway-sso-xml/actions/workflows/create-release.yml)
+
 This is a publicly readable XML output of all available sites running on the USC WordPress Pantheon Upsteam Gateway to allow Single Sign-On (SSO) via Shibboleth.
 
 Every hour a CRON will trigger a Github Action to get all site environments and Domains (for live environments) and construct the XML `usc-pantheon-gateway-sso.xml`.  A preliminary data sample exists as `usc-pantheon-gateway-sso-example.xml`.
