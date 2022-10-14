@@ -6,22 +6,31 @@ const fs = require('fs');
 
 // Set variables from shell environment for Organization and Upstream IDs
 const terminusUpstreamID = process.env.TERMINUS_ORG_UPSTREAM_ID,
+terminusTestUpstreamID = process.env.TERMINUS_TEST_UPSTREAM_ID,
 terminusOrgID = process.env.TERMINUS_ORG_ID;
 
 // Order in which we need to get site information:
-// 1. terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
-// 2. terminus env:list --field=domain <site-id>
-// 3. terminus domain:list --format FORMAT --fields FIELDS --field FIELD -- <site>.<env>
+// 1. Procution Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
+// 2. Test Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
+// 3. terminus env:list --field=domain <site-id>
+// 4. terminus domain:list --format FORMAT --fields FIELDS --field FIELD -- <site>.<env>
 
 
-// 1. terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
+// 1. Production Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
 async function orgSiteList() {
 	return new Promise(resolve => {
 		resolve( exec(`terminus org:site:list ${terminusOrgID} --upstream=${terminusUpstreamID} --fields=name,id --format=json`) );
 	});
 }
 
-// 2. terminus env:list --field=domain <site-id>
+// 2. Test Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
+async function orgTestSiteList() {
+	return new Promise(resolve => {
+		resolve( exec(`terminus org:site:list ${terminusOrgID} --upstream=${terminusTestUpstreamID} --fields=name,id --format=json`) );
+	});
+}
+
+// 3. terminus env:list --field=domain <site-id>
 
 /**
  * Get site environments available by ID.
@@ -34,7 +43,7 @@ async function siteEnvironments(siteID) {
 	});
 }
 
-// 3. terminus domain:list --format FORMAT --fields FIELDS --field FIELD -- <site>.<env>
+// 4. terminus domain:list --format FORMAT --fields FIELDS --field FIELD -- <site>.<env>
 /**
  * Get site domains by base sitename.
  * @param {string} siteName
@@ -66,6 +75,29 @@ async function allSitesToXML() {
 
 		// Transform single object to array of site objects
 		const entries = Object.entries(orgSites);
+
+		for (const entry of entries) {
+
+			if ( undefined !== entry[1].name ) {
+				names.push(entry[1].name);
+			}
+			if ( undefined !== entry[1].id ) {
+				ids.push(entry[1].id);
+			}
+		}
+
+	}
+
+	// Get list of org test sites with id, name
+	const testResult = await orgTestSiteList();
+
+	// Convert string to JSON Object
+	if (false !== testResult.stderr) {
+
+		const testSites = JSON.parse(testResult.stdout);
+
+		// Transform single object to array of site objects
+		const entries = Object.entries(testSites);
 
 		for (const entry of entries) {
 
