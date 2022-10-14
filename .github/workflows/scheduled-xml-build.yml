@@ -18,7 +18,7 @@ jobs:
       TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -37,7 +37,7 @@ jobs:
           git config user.email "<>"
 
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
@@ -47,7 +47,7 @@ jobs:
       - name: Setup PHP with tools
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.1'
           tools: composer:v2
 
       - name: Set Oauth config for Github
@@ -91,6 +91,6 @@ jobs:
     needs: [scheduled_xml]
     steps:
       - name: automerge
-        uses: 'pascalgn/automerge-action@v0.14.3'
+        uses: 'pascalgn/automerge-action@v0.15.3'
         env:
           GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
