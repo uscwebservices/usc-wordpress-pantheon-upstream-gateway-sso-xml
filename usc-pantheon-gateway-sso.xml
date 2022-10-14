@@ -2574,45 +2574,9 @@
       <me:EmailAddress>itsps@usc.edu</me:EmailAddress>
     </md:ContactPerson>
   </md:EntityDescriptor>
-  <md:EntityDescriptor entityID="urn:pr-562-usc-upstream-cicd-gateway-preview.pantheonsite.io">
-    <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://pr-562-usc-upstream-cicd-gateway-preview.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="143"/>
-    </md:SPSSODescriptor>
-    <md:Organization>
-      <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
-      <md:OrganizationDisplayName xml:lang="en-US">USC ITS</md:OrganizationDisplayName>
-      <md:OrganizationURL xml:lang="en-US">https://itservices.usc.edu</md:OrganizationURL>
-    </md:Organization>
-    <md:ContactPerson contactType="technical">
-      <md:GivenName>USC ITS</md:GivenName>
-      <me:EmailAddress>itsps@usc.edu</me:EmailAddress>
-    </md:ContactPerson>
-    <md:ContactPerson contactType="support">
-      <md:GivenName>USC ITS</md:GivenName>
-      <me:EmailAddress>itsps@usc.edu</me:EmailAddress>
-    </md:ContactPerson>
-  </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:dp-usc-upstream-cicd-gateway-preview.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dp-usc-upstream-cicd-gateway-preview.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="144"/>
-    </md:SPSSODescriptor>
-    <md:Organization>
-      <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
-      <md:OrganizationDisplayName xml:lang="en-US">USC ITS</md:OrganizationDisplayName>
-      <md:OrganizationURL xml:lang="en-US">https://itservices.usc.edu</md:OrganizationURL>
-    </md:Organization>
-    <md:ContactPerson contactType="technical">
-      <md:GivenName>USC ITS</md:GivenName>
-      <me:EmailAddress>itsps@usc.edu</me:EmailAddress>
-    </md:ContactPerson>
-    <md:ContactPerson contactType="support">
-      <md:GivenName>USC ITS</md:GivenName>
-      <me:EmailAddress>itsps@usc.edu</me:EmailAddress>
-    </md:ContactPerson>
-  </md:EntityDescriptor>
-  <md:EntityDescriptor entityID="urn:pr-563-usc-upstream-cicd-gateway-preview.pantheonsite.io">
-    <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://pr-563-usc-upstream-cicd-gateway-preview.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="145"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dp-usc-upstream-cicd-gateway-preview.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="143"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2630,7 +2594,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:test-usc-upstream-cicd-gateway-preview.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test-usc-upstream-cicd-gateway-preview.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="146"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test-usc-upstream-cicd-gateway-preview.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="144"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2648,25 +2612,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:pr-555-usc-upstream-cicd-gateway-preview.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://pr-555-usc-upstream-cicd-gateway-preview.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="147"/>
-    </md:SPSSODescriptor>
-    <md:Organization>
-      <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
-      <md:OrganizationDisplayName xml:lang="en-US">USC ITS</md:OrganizationDisplayName>
-      <md:OrganizationURL xml:lang="en-US">https://itservices.usc.edu</md:OrganizationURL>
-    </md:Organization>
-    <md:ContactPerson contactType="technical">
-      <md:GivenName>USC ITS</md:GivenName>
-      <me:EmailAddress>itsps@usc.edu</me:EmailAddress>
-    </md:ContactPerson>
-    <md:ContactPerson contactType="support">
-      <md:GivenName>USC ITS</md:GivenName>
-      <me:EmailAddress>itsps@usc.edu</me:EmailAddress>
-    </md:ContactPerson>
-  </md:EntityDescriptor>
-  <md:EntityDescriptor entityID="urn:pr-561-usc-upstream-cicd-gateway-preview.pantheonsite.io">
-    <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://pr-561-usc-upstream-cicd-gateway-preview.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="148"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://pr-555-usc-upstream-cicd-gateway-preview.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="145"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2684,7 +2630,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:live-usc-employees.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://live-usc-employees.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="149"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://live-usc-employees.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="146"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2702,7 +2648,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:dev-usc-employees.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev-usc-employees.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="150"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev-usc-employees.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="147"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2720,7 +2666,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:migration-usc-employees.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://migration-usc-employees.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="151"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://migration-usc-employees.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="148"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2738,7 +2684,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:import-usc-employees.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://import-usc-employees.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="152"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://import-usc-employees.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="149"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2756,7 +2702,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:test-usc-employees.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test-usc-employees.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="153"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test-usc-employees.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="150"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2774,7 +2720,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:dev-usc-comm-office-of-sustainability.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev-usc-comm-office-of-sustainability.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="154"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev-usc-comm-office-of-sustainability.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="151"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2792,7 +2738,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:dev-usc-provost-site.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev-usc-provost-site.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="155"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev-usc-provost-site.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="152"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2810,7 +2756,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:dev-usc-comm-about.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev-usc-comm-about.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="156"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev-usc-comm-about.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="153"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2828,7 +2774,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:live-usc-comm-about.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://live-usc-comm-about.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="157"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://live-usc-comm-about.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="154"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2846,7 +2792,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:test-usc-comm-about.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test-usc-comm-about.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="158"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test-usc-comm-about.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="155"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2864,7 +2810,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:live-usc-comm-fundraiser-maythe4th.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://live-usc-comm-fundraiser-maythe4th.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="159"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://live-usc-comm-fundraiser-maythe4th.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="156"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2882,7 +2828,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:dev-usc-comm-fundraiser-maythe4th.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev-usc-comm-fundraiser-maythe4th.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="160"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev-usc-comm-fundraiser-maythe4th.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="157"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
@@ -2900,7 +2846,7 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:test-usc-comm-fundraiser-maythe4th.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test-usc-comm-fundraiser-maythe4th.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="161"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test-usc-comm-fundraiser-maythe4th.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="158"/>
     </md:SPSSODescriptor>
     <md:Organization>
       <md:OrganizationName xml:lang="en-US">USC ITS</md:OrganizationName>
