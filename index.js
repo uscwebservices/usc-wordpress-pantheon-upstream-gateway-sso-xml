@@ -196,13 +196,13 @@ async function allSitesToXML() {
 					'contactType': 'technical',
 				})
 					.ele('md:GivenName').txt('USC ITS').up()
-					.ele('me:EmailAddress').txt('itsps@usc.edu').up()
+					.ele('md:EmailAddress').txt('itsps@usc.edu').up()
 				.up()
 				.ele('md:ContactPerson',{
 					'contactType': 'support',
 				})
 					.ele('md:GivenName').txt('USC ITS').up()
-					.ele('me:EmailAddress').txt('itsps@usc.edu').up()
+					.ele('md:EmailAddress').txt('itsps@usc.edu').up()
 				.up();
 		}
 
