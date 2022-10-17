@@ -176,34 +176,7 @@ async function allSitesToXML() {
 						'Binding': 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
 						'Location': `https://${fullSiteList.sites[i]}/wp/wp-login.php?action=wp-saml-auth`,
 						'index': `${i}`
-					}).up()
-					.up()
-				.ele('md:Organization')
-					.ele('md:OrganizationName',{
-						'xml:lang': 'en-US',
 					})
-						.txt('USC ITS').up()
-					.ele('md:OrganizationDisplayName',{
-						'xml:lang': 'en-US',
-					})
-						.txt('USC ITS').up()
-					.ele('md:OrganizationURL',{
-						'xml:lang': 'en-US',
-					})
-						.txt('https://itservices.usc.edu').up()
-					.up()
-				.ele('md:ContactPerson',{
-					'contactType': 'technical',
-				})
-					.ele('md:GivenName').txt('USC ITS').up()
-					.ele('me:EmailAddress').txt('itsps@usc.edu').up()
-				.up()
-				.ele('md:ContactPerson',{
-					'contactType': 'support',
-				})
-					.ele('md:GivenName').txt('USC ITS').up()
-					.ele('me:EmailAddress').txt('itsps@usc.edu').up()
-				.up();
 		}
 
 		const xml = root.end({ prettyPrint: true });
