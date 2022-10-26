@@ -68,6 +68,10 @@ async function allSitesToXML() {
 	// Get list of org sites with id, name
 	const result = await orgSiteList();
 
+	if (false === result.stderr) {
+		console.log(result.stderr);
+	}
+
 	// Convert string to JSON Object
 	if (false !== result.stderr) {
 
@@ -80,9 +84,19 @@ async function allSitesToXML() {
 
 			if ( undefined !== entry[1].name ) {
 				names.push(entry[1].name);
+				console.log('pushing name:' + entry[1].name);
 			}
+			if ( undefined === entry[1].name ) {
+				console.log('prod upstream undefined: entry[1].name');
+			}
+
+
 			if ( undefined !== entry[1].id ) {
 				ids.push(entry[1].id);
+				console.log('pushing id for:' + entry[1].name);
+			}
+			if ( undefined === entry[1].id ) {
+				console.log('prod upstream undefined: entry[1].id');
 			}
 		}
 
@@ -90,6 +104,10 @@ async function allSitesToXML() {
 
 	// Get list of org test sites with id, name
 	const testResult = await orgTestSiteList();
+
+	if (false === testResult.stderr) {
+		console.log(testResult.stderr);
+	}
 
 	// Convert string to JSON Object
 	if (false !== testResult.stderr) {
@@ -103,9 +121,19 @@ async function allSitesToXML() {
 
 			if ( undefined !== entry[1].name ) {
 				names.push(entry[1].name);
+				console.log('pushing name:' + entry[1].name);
 			}
+			if ( undefined === entry[1].name ) {
+				console.log('prod upstream undefined: entry[1].name');
+			}
+
+
 			if ( undefined !== entry[1].id ) {
 				ids.push(entry[1].id);
+				console.log('pushing id for:' + entry[1].name);
+			}
+			if ( undefined === entry[1].id ) {
+				console.log('prod upstream undefined: entry[1].id');
 			}
 		}
 
@@ -116,6 +144,10 @@ async function allSitesToXML() {
 	for (const name of names) {
 		const result = await siteDomains(name);
 
+		if (false === result.stderr) {
+			console.log(result.stderr);
+		}
+
 		if (false !== result.stderr) {
 			const siteDomains = JSON.parse(result.stdout);
 
@@ -124,15 +156,23 @@ async function allSitesToXML() {
 			for (const entry of entries) {
 				if ( undefined !== entry[1].id ) {
 					domains.push(entry[1].id);
-					console.log(`Adding: ${entry[1].id}`);
+					console.log(`Adding Domain: ${entry[1].id}`);
+				}
+
+				if ( undefined === entry[1].id ) {
+					console.log(`Failre to add Domain: ${entry[1]}`);
 				}
 			}
 		}
 	}
 
-	// Get domains associated with live environments
+	// Get environments associated with sites
 	for (const id of ids) {
 		const result = await siteEnvironments(id);
+
+		if (false === result.stderr) {
+			console.log(result.stderr);
+		}
 
 		if (false !== result.stderr) {
 			const siteEnvs = JSON.parse(result.stdout);
@@ -142,7 +182,7 @@ async function allSitesToXML() {
 			for (const entry of entries) {
 				if ( undefined !== entry[1].domain ) {
 					environments.push(entry[1].domain);
-					console.log(`Adding: ${entry[1].domain}`);
+					console.log(`Adding Environment: ${entry[1].domain}`);
 				}
 			}
 		}
