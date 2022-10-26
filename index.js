@@ -68,6 +68,10 @@ async function allSitesToXML() {
 	// Get list of org sites with id, name
 	const result = await orgSiteList();
 
+	if (false === result.stderr) {
+		console.log(result.stderr);
+	}
+
 	// Convert string to JSON Object
 	if (false !== result.stderr) {
 
@@ -90,6 +94,10 @@ async function allSitesToXML() {
 
 	// Get list of org test sites with id, name
 	const testResult = await orgTestSiteList();
+
+	if (false === testResult.stderr) {
+		console.log(testResult.stderr);
+	}
 
 	// Convert string to JSON Object
 	if (false !== testResult.stderr) {
