@@ -65,33 +65,33 @@ async function allSitesToXML() {
 	let domains = [];
 	console.log('calling');
 
-	// // Get list of org sites with id, name
-	// const result = await orgSiteList();
+	// Get list of org sites with id, name
+	const result = await orgSiteList();
 
-	// // Convert string to JSON Object
-	// if (false !== result.stderr) {
+	// Convert string to JSON Object
+	if (false !== result.stderr) {
 
-	// 	const orgSites = JSON.parse(result.stdout);
+		const orgSites = JSON.parse(result.stdout);
 
-	// 	// Transform single object to array of site objects
-	// 	const entries = Object.entries(orgSites);
+		// Transform single object to array of site objects
+		const entries = Object.entries(orgSites);
 
-	// 	for (const entry of entries) {
+		console.log('Org Upstream: ' + entries.length);
 
-	// 		if ( undefined !== entry[1].name ) {
-	// 			names.push(entry[1].name);
-	// 		}
-	// 		if ( undefined !== entry[1].id ) {
-	// 			ids.push(entry[1].id);
-	// 		}
-	// 	}
+		for (const entry of entries) {
 
-	// }
+			if ( undefined !== entry[1].name ) {
+				names.push(entry[1].name);
+			}
+			if ( undefined !== entry[1].id ) {
+				ids.push(entry[1].id);
+			}
+		}
+
+	}
 
 	// Get list of org test sites with id, name
 	const testResult = await orgTestSiteList();
-
-	console.log(testResult);
 
 	// Convert string to JSON Object
 	if (false !== testResult.stderr) {
@@ -100,6 +100,8 @@ async function allSitesToXML() {
 
 		// Transform single object to array of site objects
 		const entries = Object.entries(testSites);
+
+		console.log('Test Upstream: ' + entries.length);
 
 		for (const entry of entries) {
 
