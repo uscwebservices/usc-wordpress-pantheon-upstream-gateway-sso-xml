@@ -80,6 +80,8 @@ async function allSitesToXML() {
 		// Transform single object to array of site objects
 		const entries = Object.entries(orgSites);
 
+		console.log('Org Upstream: ' + entries.length);
+
 		for (const entry of entries) {
 
 			if ( undefined !== entry[1].name ) {
@@ -116,6 +118,8 @@ async function allSitesToXML() {
 
 		// Transform single object to array of site objects
 		const entries = Object.entries(testSites);
+
+		console.log('Test Upstream: ' + entries.length);
 
 		for (const entry of entries) {
 
