@@ -10,8 +10,13 @@ terminusTestUpstreamID = process.env.TERMINUS_TEST_UPSTREAM_ID,
 terminusOrgID = process.env.TERMINUS_ORG_ID;
 
 console.log(typeof(terminusUpstreamID));
+console.log(terminusUpstreamID);
+
 console.log(typeof(terminusTestUpstreamID));
+console.log(terminusTestUpstreamID);
+
 console.log(typeof(terminusOrgID));
+console.log(terminusOrgID);
 
 // Order in which we need to get site information:
 // 1. Procution Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
