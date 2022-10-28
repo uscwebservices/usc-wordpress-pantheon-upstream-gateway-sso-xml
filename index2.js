@@ -9,6 +9,10 @@ const terminusUpstreamID = process.env.TERMINUS_ORG_UPSTREAM_ID,
 terminusTestUpstreamID = process.env.TERMINUS_TEST_UPSTREAM_ID,
 terminusOrgID = process.env.TERMINUS_ORG_ID;
 
+console.log(typeof(terminusUpstreamID));
+console.log(typeof(terminusTestUpstreamID));
+console.log(typeof(terminusOrgID));
+
 // Order in which we need to get site information:
 // 1. Procution Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
 // 2. Test Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
@@ -106,6 +110,8 @@ async function allSitesToXML() {
 
 	// Get list of org test sites with id, name
 	const testResult = await orgTestSiteList();
+
+    console.log(testResult);
 
 	if (false === testResult.stderr) {
 		console.log(testResult.stderr);
