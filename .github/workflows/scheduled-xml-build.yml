@@ -15,6 +15,7 @@ jobs:
       API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       TERMINUS_ORG_ID: ${{ secrets.TERMINUS_ORG_ID }}
       TERMINUS_ORG_UPSTREAM_ID: ${{ secrets.TERMINUS_ORG_UPSTREAM_ID }}
+      TERMINUS_TEST_UPSTREAM_ID: ${{ secrets.TERMINUS_TEST_UPSTREAM_ID }}
       TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
 
     steps:
