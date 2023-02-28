@@ -5,9 +5,8 @@ const { create } = require('xmlbuilder2');
 const fs = require('fs');
 
 // Set variables from shell environment for Organization and Upstream IDs
-const terminusUpstreamID = process.env.TERMINUS_ORG_UPSTREAM_ID,
-terminusTestUpstreamID = process.env.TERMINUS_TEST_UPSTREAM_ID,
-terminusOrgID = process.env.TERMINUS_ORG_ID;
+const terminusOrgID = process.env.TERMINUS_ORG_ID,
+terminusUpstreams = process.env.TERMINUS_UPSTREAMS;
 
 // Order in which we need to get site information:
 // 1. Procution Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
@@ -15,6 +14,9 @@ terminusOrgID = process.env.TERMINUS_ORG_ID;
 // 3. terminus env:list --field=domain <site-id>
 // 4. terminus domain:list --format FORMAT --fields FIELDS --field FIELD -- <site>.<env>
 
+
+// 0. Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
+async function org
 
 // 1. Production Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
 async function orgSiteList() {
