@@ -174,6 +174,15 @@ async function allSitesToXML() {
         }
 
         // TODO: Add manual site list
+		const customURLsFile = require('./customURLs.json');
+		const customURLs = customURLsFile.urls;
+
+		if ( undefined !== customURLs) {
+			for (const url of customURLs) {
+				domains.push(url);
+			}
+
+		}
 
         // Set data as an Object
         const fullSiteList = new Object;
