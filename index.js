@@ -15,24 +15,17 @@ terminusUpstreams = process.env.TERMINUS_UPSTREAMS;
 // 4. manual site list injection
 
 
-// 0. Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
-async function org
-
-// 1. Production Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
-async function orgSiteList() {
-	return new Promise(resolve => {
-		resolve( exec(`terminus org:site:list ${terminusOrgID} --upstream=${terminusUpstreamID} --fields=name,id --format=json`) );
+/**
+ * Organization Site List
+ * @param {string} orgID
+ * @param {string} upstreamID
+ * @returns object
+ */
+async function orgSiteList(orgID, upstreamID) {
+    return new Promise(resolve => {
+		resolve( exec(`terminus org:site:list ${orgID} --upstream=${upstreamID} --fields=name,id --format=json`) );
 	});
 }
-
-// 2. Test Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
-async function orgTestSiteList() {
-	return new Promise(resolve => {
-		resolve( exec(`terminus org:site:list ${terminusOrgID} --upstream=${terminusTestUpstreamID} --fields=name,id --format=json`) );
-	});
-}
-
-// 3. terminus env:list --field=domain <site-id>
 
 /**
  * Get site environments available by ID.
