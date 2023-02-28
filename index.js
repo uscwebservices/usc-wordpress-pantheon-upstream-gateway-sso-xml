@@ -73,72 +73,39 @@ async function siteListData(orgID, siteID) {
 }
 
 
+/**
+ * Get all sites and compose XML output
+ */
 async function allSitesToXML() {
 
 	// Set empty arrays for names and ids
-	let names = [];
-	let ids = [];
+    let upstreamIDs = terminusUpstreams;
+    let allSitesData = {};
+    let names = [];
+    let ids = [];
 	let environments = [];
 	let domains = [];
-	console.log('calling');
 
-	// Get list of org sites with id, name
-	const result = await orgSiteList();
+    console.log('Establishing connection to Pantheon');
 
-	if (false === result.stderr) {
-		console.log(result.stderr);
-	}
+    if ( 'string' === typeof(upstreamIDs) && 0 !== upstreamIDs ) {
 
-	// Convert string to JSON Object
-	if (false !== result.stderr) {
+        upstreamIDs = upstreamIDs.split(',');
 
-		const orgSites = JSON.parse(result.stdout);
+        for (let i in upstreamIDs) {
 
-		// Transform single object to array of site objects
-		const entries = Object.entries(orgSites);
+            let results = await siteListData(terminusOrgID,upstreamIDs[i]);
 
-		console.log('Org Upstream: ' + entries.length);
+            allSitesData = Object.assign(allSitesData, results);
 
-		for (const entry of entries) {
+        }
 
-			if ( undefined !== entry[1].name ) {
-				names.push(entry[1].name);
-				console.log('pushing name:' + entry[1].name);
-			}
-			if ( undefined === entry[1].name ) {
-				console.log('prod upstream undefined: entry[1].name');
-			}
+        // Convert Object to Array of Objects
+        const entries = Object.entries(allSitesData);
 
+        console.log('Sites using upstreams: ' + entries.length);
 
-			if ( undefined !== entry[1].id ) {
-				ids.push(entry[1].id);
-				console.log('pushing id for:' + entry[1].name);
-			}
-			if ( undefined === entry[1].id ) {
-				console.log('prod upstream undefined: entry[1].id');
-			}
-		}
-
-	}
-
-	// Get list of org test sites with id, name
-	const testResult = await orgTestSiteList();
-
-	if (false === testResult.stderr) {
-		console.log(testResult.stderr);
-	}
-
-	// Convert string to JSON Object
-	if (false !== testResult.stderr) {
-
-		const testSites = JSON.parse(testResult.stdout);
-
-		// Transform single object to array of site objects
-		const entries = Object.entries(testSites);
-
-		console.log('Test Upstream: ' + entries.length);
-
-		for (const entry of entries) {
+        for (const entry of entries) {
 
 			if ( undefined !== entry[1].name ) {
 				names.push(entry[1].name);
@@ -158,96 +125,97 @@ async function allSitesToXML() {
 			}
 		}
 
-	}
+        // Get domains associated with live environments
+        for (const name of names) {
+            const result = await siteDomains(name);
 
+            if (false === result.stderr) {
+                console.log(result.stderr);
+            }
 
-	// Get domains associated with live environments
-	for (const name of names) {
-		const result = await siteDomains(name);
+            if (false !== result.stderr) {
+                const siteDomains = JSON.parse(result.stdout);
 
-		if (false === result.stderr) {
-			console.log(result.stderr);
-		}
+                const entries = Object.entries(siteDomains);
 
-		if (false !== result.stderr) {
-			const siteDomains = JSON.parse(result.stdout);
+                for (const entry of entries) {
+                    if ( undefined !== entry[1].id ) {
+                        domains.push(entry[1].id);
+                        console.log(`Adding Domain: ${entry[1].id}`);
+                    }
 
-			const entries = Object.entries(siteDomains);
+                    if ( undefined === entry[1].id ) {
+                        console.log(`Failre to add Domain: ${entry[1]}`);
+                    }
+                }
+            }
+        }
 
-			for (const entry of entries) {
-				if ( undefined !== entry[1].id ) {
-					domains.push(entry[1].id);
-					console.log(`Adding Domain: ${entry[1].id}`);
-				}
+        // Get environments associated with sites
+        for (const id of ids) {
+            const result = await siteEnvironments(id);
 
-				if ( undefined === entry[1].id ) {
-					console.log(`Failre to add Domain: ${entry[1]}`);
-				}
-			}
-		}
-	}
+            if (false === result.stderr) {
+                console.log(result.stderr);
+            }
 
-	// Get environments associated with sites
-	for (const id of ids) {
-		const result = await siteEnvironments(id);
+            if (false !== result.stderr) {
+                const siteEnvs = JSON.parse(result.stdout);
 
-		if (false === result.stderr) {
-			console.log(result.stderr);
-		}
+                const entries = Object.entries(siteEnvs);
 
-		if (false !== result.stderr) {
-			const siteEnvs = JSON.parse(result.stdout);
+                for (const entry of entries) {
+                    if ( undefined !== entry[1].domain ) {
+                        environments.push(entry[1].domain);
+                        console.log(`Adding Environment: ${entry[1].domain}`);
+                    }
+                }
+            }
+        }
 
-			const entries = Object.entries(siteEnvs);
+        // TODO: Add manual site list
 
-			for (const entry of entries) {
-				if ( undefined !== entry[1].domain ) {
-					environments.push(entry[1].domain);
-					console.log(`Adding Environment: ${entry[1].domain}`);
-				}
-			}
-		}
-	}
+        // Set data as an Object
+        const fullSiteList = new Object;
+        fullSiteList.sites = domains.concat(environments);
 
-	// Set data as an Object
-	const fullSiteList = new Object;
-	fullSiteList.sites = domains.concat(environments);
+        // Create XML format
+        const root = create({ version: '1.0' })
+            .ele('md:EntitiesDescriptor', {
+                    'xmlns:md': 'urn:oasis:names:tc:SAML:2.0:metadata',
+                    'xmlns:mdui':'urn:oasis:names:tc:SAML:2.0:metadata:ui',
+                    'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+                    'xmlns:ds': 'http://www.w3.org/2000/09/xmldsig#',
+                    'xsi:schemaLocation': 'urn:oasis:names:tc:SAML:2.0:metadata ../schemas/saml-schema-metadata-2.0.xsd urn:mace:shibboleth:metadata:1.0 ../schemas/shibboleth-metadata-1.0.xsd http://www.w3.org/2000/09/xmldsig# ../schemas/xmldsig-core-schema.xsd',
+                    'Name': 'https://www.usc.edu/its/pantheon'
+                })
+            for(let i = 0; i <= (fullSiteList.sites.length - 1); i++) {
 
-	// Create XML format
-	const root = create({ version: '1.0' })
-		.ele('md:EntitiesDescriptor', {
-				'xmlns:md': 'urn:oasis:names:tc:SAML:2.0:metadata',
-				'xmlns:mdui':'urn:oasis:names:tc:SAML:2.0:metadata:ui',
-				'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
-				'xmlns:ds': 'http://www.w3.org/2000/09/xmldsig#',
-				'xsi:schemaLocation': 'urn:oasis:names:tc:SAML:2.0:metadata ../schemas/saml-schema-metadata-2.0.xsd urn:mace:shibboleth:metadata:1.0 ../schemas/shibboleth-metadata-1.0.xsd http://www.w3.org/2000/09/xmldsig# ../schemas/xmldsig-core-schema.xsd',
-				'Name': 'https://www.usc.edu/its/pantheon'
-			})
-		for(let i = 0; i <= (fullSiteList.sites.length - 1); i++) {
+                const entityDesc = root.ele('md:EntityDescriptor');
 
-			const entityDesc = root.ele('md:EntityDescriptor');
+                entityDesc.att('entityID', `urn:${fullSiteList.sites[i]}`)
+                    .ele('md:SPSSODescriptor', {
+                        'AuthnRequestsSigned': 'false',
+                        'WantAssertionsSigned': 'true',
+                        'protocolSupportEnumeration': 'urn:oasis:names:tc:SAML:2.0:protocol'
+                    })
+                        .ele('md:AssertionConsumerService', {
+                            'Binding': 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
+                            'Location': `https://${fullSiteList.sites[i]}/wp/wp-login.php?action=wp-saml-auth`,
+                            'index': `${i}`
+                        })
+            }
 
-			entityDesc.att('entityID', `urn:${fullSiteList.sites[i]}`)
-				.ele('md:SPSSODescriptor', {
-					'AuthnRequestsSigned': 'false',
-					'WantAssertionsSigned': 'true',
-					'protocolSupportEnumeration': 'urn:oasis:names:tc:SAML:2.0:protocol'
-				})
-					.ele('md:AssertionConsumerService', {
-						'Binding': 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
-						'Location': `https://${fullSiteList.sites[i]}/wp/wp-login.php?action=wp-saml-auth`,
-						'index': `${i}`
-					})
-		}
+            const xml = root.end({ prettyPrint: true });
+            // console.log(xml);
 
-		const xml = root.end({ prettyPrint: true });
-		// console.log(xml);
+            // Output XML to file.
+            let full_file_name = "./usc-pantheon-gateway-sso.xml";
+            fs.writeFileSync(full_file_name, xml, function(err) {
+                if (err) throw err;
+            });
 
-		// Output XML to file.
-		let full_file_name = "./usc-pantheon-gateway-sso.xml";
-		fs.writeFileSync(full_file_name, xml, function(err) {
-			if (err) throw err;
-		});
+    }
 
 
 }
