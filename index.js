@@ -9,10 +9,10 @@ const terminusOrgID = process.env.TERMINUS_ORG_ID,
 terminusUpstreams = process.env.TERMINUS_UPSTREAMS;
 
 // Order in which we need to get site information:
-// 1. Procution Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
-// 2. Test Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
-// 3. terminus env:list --field=domain <site-id>
-// 4. terminus domain:list --format FORMAT --fields FIELDS --field FIELD -- <site>.<env>
+// 1. terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
+// 2. terminus env:list --field=domain <site-id>
+// 3. terminus domain:list --format FORMAT --fields FIELDS --field FIELD -- <site>.<env>
+// 4. manual site list injection
 
 
 // 0. Upstream: terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
