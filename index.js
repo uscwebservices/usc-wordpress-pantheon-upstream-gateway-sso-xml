@@ -49,6 +49,29 @@ async function siteDomains(siteName) {
 	});
 }
 
+/**
+ * Site List Data
+ * @param {string} orgID
+ * @param {string} siteID
+ * @returns object
+ */
+async function siteListData(orgID, siteID) {
+
+    const result = await orgSiteList(orgID, siteID);
+
+	if (false === result.stderr) {
+		console.log(result.stderr);
+	}
+
+	// Convert string to JSON Object
+	if (false !== result.stderr) {
+
+        return JSON.parse(result.stdout);
+
+	}
+    return false;
+}
+
 
 async function allSitesToXML() {
 
