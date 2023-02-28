@@ -18,6 +18,20 @@ Secret | Type | Sample | Description
 `TERMINUS_UPSTREAMS` | `string` | `098765434231,1234567890` | The Pantheon Upstream IDs for this upstream as a comma separated list of IDs.
 `TERMINUS_TOKEN` | `string` | `1a2b3c4d5e6f` | Personal access token to Pantheon organization (obtained from Pantheon).  Create a token under your Pantheon account in Account -> Machine Tokens.
 
+## Custom URLs
+
+You can add custom URL's to be included in the XML output.  Open `customURLs.json` and add the URL to the array within the JSON Object:
+
+```json
+{
+  "urls": [
+    "url1.usc.edu",
+    "url2.usc.edu",
+    "urls3.usc.edu"
+  ]
+}
+```
+
 ## Running Locally
 
 You can run this package locally using the commands below and replacing any `<variables-in-angle-brackets>`
