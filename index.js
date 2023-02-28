@@ -38,7 +38,6 @@ async function siteEnvironments(siteID) {
 	});
 }
 
-// 4. terminus domain:list --format FORMAT --fields FIELDS --field FIELD -- <site>.<env>
 /**
  * Get site domains by base sitename.
  * @param {string} siteName
