@@ -1,0 +1,29 @@
+name: Scheduled delete abandoned branches
+
+on:
+  # Run daily at midnight
+  schedule:
+    - cron: "0 15 * * 3"
+    ## At 15:00 (08:00 PST) on Wednesday
+
+  # Allow workflow to be manually run from the GitHub UI
+  workflow_dispatch:
+
+jobs:
+  cleanup_old_branches:
+    runs-on: ubuntu-latest
+    name: Satisfy my repo CDO
+    steps:
+      - name: Delete dead branches
+        uses: phpdocker-io/github-actions-delete-abandoned-branches@v1
+        id: delete_stuff
+        with:
+          github_token: ${{ github.token }}
+          last_commit_age_days: 21
+          ignore_branches: next-version,dont-deleteme
+
+          # Disable dry run and actually get stuff deleted
+          dry_run: no
+
+      - name: Get output
+        run: "echo 'Deleted branches: ${{ steps.delete_stuff.outputs.deleted_branches }}'"
