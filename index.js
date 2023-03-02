@@ -86,6 +86,8 @@ async function allSitesToXML() {
 	let environments = [];
 	let domains = [];
 
+    console.log('Establishing connection to Pantheon');
+
     try {
         if ( 'undefined' === typeof(terminusUpstreams) ) throw "Upstream IDs secret is not set";
     }
