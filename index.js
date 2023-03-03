@@ -88,6 +88,13 @@ async function allSitesToXML() {
 
     console.log('Establishing connection to Pantheon');
 
+    try {
+        if ( 'undefined' === typeof(terminusUpstreams) ) throw "Upstream IDs secret is not set";
+    }
+    catch(err) {
+        console.error(err);
+    }
+
     if ( 'string' === typeof(upstreamIDs) && 0 !== upstreamIDs ) {
 
         upstreamIDs = upstreamIDs.split(',');
