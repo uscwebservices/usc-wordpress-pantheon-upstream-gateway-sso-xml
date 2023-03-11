@@ -85,6 +85,7 @@ async function allSitesToXML() {
     let ids = [];
 	let environments = [];
 	let domains = [];
+    const upstreamLoginAppend = '/wp/wp-login.php?action=wp-saml-auth';
 
     console.log('Establishing connection to Pantheon');
 
@@ -147,12 +148,15 @@ async function allSitesToXML() {
 
                 for (const entry of entries) {
                     if ( undefined !== entry[1].id ) {
-                        domains.push(entry[1].id);
+                        // domains.push(entry[1].id);
+                        domains.push(
+                            `{"urn": "${entry[1].id}", "location": "${entry[1].id}${upstreamLoginAppend}"}`
+                        );
                         console.log(`Adding Domain: ${entry[1].id}`);
                     }
 
                     if ( undefined === entry[1].id ) {
-                        console.log(`Failre to add Domain: ${entry[1]}`);
+                        console.log(`Failure to add Domain: ${entry[1]}`);
                     }
                 }
             }
@@ -173,20 +177,25 @@ async function allSitesToXML() {
 
                 for (const entry of entries) {
                     if ( undefined !== entry[1].domain ) {
-                        environments.push(entry[1].domain);
+                        environments.push(
+                            `{"urn": "${entry[1].domain}", "location": "${entry[1].domain}${upstreamLoginAppend}"}`
+                        );
                         console.log(`Adding Environment: ${entry[1].domain}`);
                     }
                 }
             }
         }
 
-        // TODO: Add manual site list
+        // Add manual site list
 		const customURLsFile = require('./customURLs.json');
-		const customURLs = customURLsFile.urls;
+        const customURLs = Object.entries(customURLsFile.sites);
 
 		if ( undefined !== customURLs) {
 			for (const url of customURLs) {
-				domains.push(url);
+				domains.push(
+                    `{"urn": "${url[1].urn}", "location": "${url[1].location}${upstreamLoginAppend}"}`
+                );
+                console.log(`Adding Custom URL: ${url[1].urn}`);
 			}
 
 		}
@@ -194,6 +203,7 @@ async function allSitesToXML() {
         // Set data as an Object
         const fullSiteList = new Object;
         fullSiteList.sites = domains.concat(environments);
+        const sitesList = fullSiteList.sites;
 
         // Create XML format
         const root = create({ version: '1.0' })
@@ -205,11 +215,17 @@ async function allSitesToXML() {
                     'xsi:schemaLocation': 'urn:oasis:names:tc:SAML:2.0:metadata ../schemas/saml-schema-metadata-2.0.xsd urn:mace:shibboleth:metadata:1.0 ../schemas/shibboleth-metadata-1.0.xsd http://www.w3.org/2000/09/xmldsig# ../schemas/xmldsig-core-schema.xsd',
                     'Name': 'https://www.usc.edu/its/pantheon'
                 })
-            for(let i = 0; i <= (fullSiteList.sites.length - 1); i++) {
+
+            let siteIndex = 0;
+            for (const siteData of sitesList){
+
+                // const site = Object.entries(fullSiteList.sites[i]);
+                const site = JSON.parse(siteData);
 
                 const entityDesc = root.ele('md:EntityDescriptor');
 
-                entityDesc.att('entityID', `urn:${fullSiteList.sites[i]}`)
+                // entityDesc.att('entityID', `urn:${fullSiteList.sites[i].urn}`)
+                entityDesc.att('entityID', `urn:${site.urn}`)
                     .ele('md:SPSSODescriptor', {
                         'AuthnRequestsSigned': 'false',
                         'WantAssertionsSigned': 'true',
@@ -217,13 +233,13 @@ async function allSitesToXML() {
                     })
                         .ele('md:AssertionConsumerService', {
                             'Binding': 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
-                            'Location': `https://${fullSiteList.sites[i]}/wp/wp-login.php?action=wp-saml-auth`,
-                            'index': `${i}`
+                            'Location': `https://${site.location}`,
+                            'index': `${siteIndex}`
                         })
+                siteIndex++;
             }
 
             const xml = root.end({ prettyPrint: true });
-            // console.log(xml);
 
             // Output XML to file.
             let full_file_name = "./usc-pantheon-gateway-sso.xml";

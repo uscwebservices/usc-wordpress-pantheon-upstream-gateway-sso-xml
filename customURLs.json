@@ -1,8 +1,20 @@
 {
-  "urls": [
-    "dev-usc-dp.pantheonsite.io",
-    "test-usc-dp.pantheonsite.io",
-    "live-usc-dp.pantheonsite.io",
-    "www.usc.edu"
-  ]
+  "sites": {
+    "dev-usc-dp.pantheonsite.io": {
+      "urn": "dev-usc-dp.pantheonsite.io",
+      "location": "dev-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "test-usc-dp.pantheonsite.io": {
+      "urn": "test-usc-dp.pantheonsite.io",
+      "location": "test-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "live-usc-dp.pantheonsite.io": {
+      "urn": "live-usc-dp.pantheonsite.io",
+      "location": "live-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "www.usc.edu": {
+      "urn": "www.usc.edu",
+      "location": "www.usc.edu/wp-login.php?action=wp-saml-auth"
+    }
+  }
 }
