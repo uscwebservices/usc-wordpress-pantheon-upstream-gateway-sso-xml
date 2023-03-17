@@ -14,7 +14,7 @@
     },
     "sso-usc-dp.pantheonsite.io": {
       "urn": "sso-usc-dp.pantheonsite.io",
-      "location": "lsso-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+      "location": "sso-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth"
     },
     "www.usc.edu": {
       "urn": "www.usc.edu",

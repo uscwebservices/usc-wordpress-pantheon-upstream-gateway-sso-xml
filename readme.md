@@ -34,7 +34,9 @@ You can add custom URL's to be included in the XML output.  Open `customURLs.jso
 
 ## Running Locally
 
-You can run this package locally using the commands below and replacing any `<variables-in-angle-brackets>`
+You can run this package locally using the commands below and replacing any `<variables-in-angle-brackets>` or by copying `local-sample.sh` as `local.sh` and replacing the variables in there to run as `./local.sh`.
+
+***IMPORTANT: DO NOT COMMIT ID'S OR SECRETS TO REPOS!***
 
 ```console
 export TERMINUS_ORG_ID=<terminus-org-id>
