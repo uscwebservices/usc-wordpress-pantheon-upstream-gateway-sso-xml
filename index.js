@@ -193,7 +193,7 @@ async function allSitesToXML() {
 		if ( undefined !== customURLs) {
 			for (const url of customURLs) {
 				domains.push(
-                    `{"urn": "${url[1].urn}", "location": "${url[1].location}${upstreamLoginAppend}"}`
+                    `{"urn": "${url[1].urn}", "location": "${url[1].location}"}`
                 );
                 console.log(`Adding Custom URL: ${url[1].urn}`);
 			}

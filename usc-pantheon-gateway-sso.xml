@@ -312,27 +312,27 @@
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:dev-usc-dp.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth/wp/wp-login.php?action=wp-saml-auth" index="62"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dev-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth" index="62"/>
     </md:SPSSODescriptor>
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:test-usc-dp.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth/wp/wp-login.php?action=wp-saml-auth" index="63"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://test-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth" index="63"/>
     </md:SPSSODescriptor>
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:live-usc-dp.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://live-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth/wp/wp-login.php?action=wp-saml-auth" index="64"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://live-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth" index="64"/>
     </md:SPSSODescriptor>
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:sso-usc-dp.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://sso-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth/wp/wp-login.php?action=wp-saml-auth" index="65"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://sso-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth" index="65"/>
     </md:SPSSODescriptor>
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:www.usc.edu">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://www.usc.edu/wp-login.php?action=wp-saml-auth/wp/wp-login.php?action=wp-saml-auth" index="66"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://www.usc.edu/wp-login.php?action=wp-saml-auth" index="66"/>
     </md:SPSSODescriptor>
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:live-usc-president-investments.pantheonsite.io">
