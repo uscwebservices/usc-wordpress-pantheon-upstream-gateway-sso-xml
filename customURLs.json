@@ -35,6 +35,22 @@
     "mobile.usc.edu": {
       "urn": "mobile.usc.edu",
       "location": "mobile.usc.edu/wp-login.php?action=wp-saml-auth"
+    },
+    "dev-usc-yousc.pantheonsite.io": {
+      "urn": "dev-usc-yousc.pantheonsite.io",
+      "location": "dev-usc-yousc.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "test-usc-yousc.pantheonsite.io": {
+      "urn": "test-usc-yousc.pantheonsite.io",
+      "location": "test-usc-yousc.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "live-usc-yousc.pantheonsite.io": {
+      "urn": "live-usc-yousc.pantheonsite.io",
+      "location": "live-usc-yousc.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "you.usc.edu": {
+      "urn": "you.usc.edu",
+      "location": "you.usc.edu/wp-login.php?action=wp-saml-auth"
     }
   }
 }
