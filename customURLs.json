@@ -1,5 +1,78 @@
 {
   "sites": {
+
+    "dev-usc-commencement-2020.pantheonsite.io": {
+      "urn": "dev-usc-commencement-2020.pantheonsite.io",
+      "location": "dev-usc-commencement-2020.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "test-usc-commencement-2020.pantheonsite.io": {
+      "urn": "test-usc-commencement-2020.pantheonsite.io",
+      "location": "test-usc-commencement-2020.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "live-usc-commencement-2020.pantheonsite.io": {
+      "urn": "live-usc-commencement-2020.pantheonsite.io",
+      "location": "live-usc-commencement-2020.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "2020trojan.usc.edu": {
+      "urn": "2020trojan.usc.edu",
+      "location": "2020trojan.usc.edu/wp-login.php?action=wp-saml-auth"
+    },
+    "dev-usc-admissions.pantheonsite.io": {
+      "urn": "dev-usc-admissions.pantheonsite.io",
+      "location": "dev-usc-admissions.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "test-usc-admissions.pantheonsite.io": {
+      "urn": "test-usc-admissions.pantheonsite.io",
+      "location": "test-usc-admissions.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "live-usc-admissions.pantheonsite.io": {
+      "urn": "live-usc-admissions.pantheonsite.io",
+      "location": "live-usc-admissions.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "admission.usc.edu": {
+      "urn": "admission.usc.edu",
+      "location": "admission.usc.edu/wp-login.php?action=wp-saml-auth"
+    },
+    "dev-usc-fall-convocation.pantheonsite.io": {
+      "urn": "dev-usc-fall-convocation.pantheonsite.io",
+      "location": "dev-usc-fall-convocation.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "test-usc-fall-convocation.pantheonsite.io": {
+      "urn": "test-usc-fall-convocation.pantheonsite.io",
+      "location": "test-usc-fall-convocation.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "live-usc-fall-convocation.pantheonsite.io": {
+      "urn": "live-dp.pantheonsite.io",
+      "location": "live-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "dev-usc-financial-aid.pantheonsite.io": {
+      "urn": "dev-usc-financial-aid.pantheonsite.io",
+      "location": "dev-usc-financial-aid.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "test-usc-financial-aid.pantheonsite.io": {
+      "urn": "test-usc-financial-aid.pantheonsite.io",
+      "location": "test-usc-financial-aid.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "live-usc-financial-aid.pantheonsite.io": {
+      "urn": "live-usc-financial-aid.pantheonsite.io",
+      "location": "live-usc-financial-aid.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "dev-usc-news.pantheonsite.io": {
+      "urn": "dev-usc-news.pantheonsite.io",
+      "location": "dev-usc-news.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "test-usc-news.pantheonsite.io": {
+      "urn": "test-usc-news.pantheonsite.io",
+      "location": "test-usc-news.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "live-usc-news.pantheonsite.io": {
+      "urn": "live-usc-news.pantheonsite.io",
+      "location": "live-usc-news.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "news.usc.edu": {
+      "urn": "news.usc.edu",
+      "location": "news.usc.edu/wp-login.php?action=wp-saml-auth"
+    },
     "dev-usc-dp.pantheonsite.io": {
       "urn": "dev-usc-dp.pantheonsite.io",
       "location": "dev-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth"
