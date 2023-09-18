@@ -124,6 +124,22 @@
     "you.usc.edu": {
       "urn": "you.usc.edu",
       "location": "you.usc.edu/wp-login.php?action=wp-saml-auth"
+    },
+    "dev-usc-financial-aid.pantheonsite.io": {
+      "urn": "dev-usc-financial-aid.pantheonsite.io",
+      "location": "dev-usc-financial-aid.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "test-usc-financial-aid.pantheonsite.io": {
+      "urn": "test-usc-financial-aid.pantheonsite.io",
+      "location": "test-usc-financial-aid.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "live-usc-financial-aid.pantheonsite.io": {
+      "urn": "live-usc-financial-aid.pantheonsite.io",
+      "location": "live-usc-financial-aid.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "financialaid.usc.edu": {
+      "urn": "financialaid.usc.edu",
+      "location": "financialaid.usc.edu/wp-login.php?action=wp-saml-auth"
     }
   }
 }
