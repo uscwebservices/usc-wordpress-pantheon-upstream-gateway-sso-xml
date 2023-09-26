@@ -73,6 +73,22 @@
       "urn": "news.usc.edu",
       "location": "news.usc.edu/wp-login.php?action=wp-saml-auth"
     },
+    "pressroom.usc.edu": {
+      "urn": "pressroom.usc.edu",
+      "location": "pressroom.usc.edu/wp-login.php?action=wp-saml-auth"
+    },
+    "tfm.usc.edu": {
+      "urn": "tfm.usc.edu",
+      "location": "tfm.usc.edu/wp-login.php?action=wp-saml-auth"
+    },
+    "trojanfamily.usc.edu": {
+      "urn": "trojanfamily.usc.edu",
+      "location": "trojanfamily.usc.edu/wp-login.php?action=wp-saml-auth"
+    },
+    "today.usc.edu": {
+      "urn": "today.usc.edu",
+      "location": "today.usc.edu/wp-login.php?action=wp-saml-auth"
+    },
     "dev-usc-dp.pantheonsite.io": {
       "urn": "dev-usc-dp.pantheonsite.io",
       "location": "dev-usc-dp.pantheonsite.io/wp-login.php?action=wp-saml-auth"
