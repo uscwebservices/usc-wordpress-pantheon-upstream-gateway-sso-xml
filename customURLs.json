@@ -156,6 +156,22 @@
     "financialaid.usc.edu": {
       "urn": "financialaid.usc.edu",
       "location": "financialaid.usc.edu/wp-login.php?action=wp-saml-auth"
+    },
+    "dev-usc-classes-legacy.pantheonsite.io": {
+      "urn": "dev-usc-classes-legacy.pantheonsite.io",
+      "location": "dev-usc-classes-legacy.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "test-usc-classes-legacy.pantheonsite.io": {
+      "urn": "test-usc-classes-legacy.pantheonsite.io",
+      "location": "test-usc-classes-legacy.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "live-usc-classes-legacy.pantheonsite.io": {
+      "urn": "live-usc-classes-legacy.pantheonsite.io",
+      "location": "live-usc-classes-legacy.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "classes.usc.edu": {
+      "urn": "classes.usc.edu",
+      "location": "classes.usc.edu/wp-login.php?action=wp-saml-auth"
     }
   }
 }
