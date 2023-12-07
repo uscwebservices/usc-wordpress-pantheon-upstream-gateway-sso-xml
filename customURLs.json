@@ -172,6 +172,22 @@
     "classes.usc.edu": {
       "urn": "classes.usc.edu",
       "location": "classes.usc.edu/wp-login.php?action=wp-saml-auth"
+    },
+    "dev-usc-dp-roski.pantheonsite.io": {
+      "urn": "dev-usc-dp-roski.pantheonsite.io",
+      "location": "dev-usc-dp-roski.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "test-usc-dp-roski.pantheonsite.io": {
+      "urn": "test-usc-dp-roski.pantheonsite.io",
+      "location": "test-usc-dp-roski.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "live-usc-dp-roski.pantheonsite.io": {
+      "urn": "live-usc-dp-roski.pantheonsite.io",
+      "location": "live-usc-dp-roski.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "roski.usc.edu": {
+      "urn": "roski.usc.edu",
+      "location": "roski.usc.edu/wp-login.php?action=wp-saml-auth"
     }
   }
 }
