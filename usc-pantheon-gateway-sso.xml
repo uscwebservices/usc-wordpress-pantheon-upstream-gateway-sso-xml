@@ -960,9 +960,9 @@
       <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://content-usc-upstream-cicd-gateway-preview.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="191"/>
     </md:SPSSODescriptor>
   </md:EntityDescriptor>
-  <md:EntityDescriptor entityID="urn:pr-981-usc-upstream-cicd-gateway-preview.pantheonsite.io">
+  <md:EntityDescriptor entityID="urn:pr-983-usc-upstream-cicd-gateway-preview.pantheonsite.io">
     <md:SPSSODescriptor AuthnRequestsSigned="false" WantAssertionsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://pr-981-usc-upstream-cicd-gateway-preview.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="192"/>
+      <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://pr-983-usc-upstream-cicd-gateway-preview.pantheonsite.io/wp/wp-login.php?action=wp-saml-auth" index="192"/>
     </md:SPSSODescriptor>
   </md:EntityDescriptor>
   <md:EntityDescriptor entityID="urn:pr-978-usc-upstream-cicd-gateway-preview.pantheonsite.io">
