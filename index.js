@@ -1,3 +1,21 @@
+/**
+ * This script will get all sites and their envirionment based on:
+ * 1. Being on an upstream that are set in an environment variable of TERMINUS_UPSTREAMS separated by commas
+ *     a. Example export TERMINUS_UPSTREAMS='123456,654321`;
+ * 2. Sites in Pantheon that have the following tags:
+ *     a. `sso-wp-root` - sets login to `/wp-login`
+ *     b. `sso-wp-web` - sets the login to `/wp/wp-login`
+ * 3. Manual site list found in customURLS.json in XML format
+ *
+ *
+ * Order in which we need to get site information:
+ * 1. terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
+ * 2. terminus env:list --field=domain <site-id>
+ * 3. terminus domain:list --format FORMAT --fields FIELDS --field FIELD -- <site>.<env>
+ * 4. manual site list injection
+ */
+
+
 // Require utilities
 const util = require('node:util');
 const exec = util.promisify(require('node:child_process').exec);
@@ -8,15 +26,9 @@ const fs = require('fs');
 const terminusOrgID = process.env.TERMINUS_ORG_ID,
 terminusUpstreams = process.env.TERMINUS_UPSTREAMS;
 
-// Order in which we need to get site information:
-// 1. terminus org:site:list <org-id> --upstream=<upstream-id> --format=json
-// 2. terminus env:list --field=domain <site-id>
-// 3. terminus domain:list --format FORMAT --fields FIELDS --field FIELD -- <site>.<env>
-// 4. manual site list injection
-
 
 /**
- * Organization Site List
+ * Organization Site List gets the list of sites for an upstream in JSON format with name and id
  * @param {string} orgID
  * @param {string} upstreamID
  * @returns object
@@ -28,7 +40,7 @@ async function orgSiteList(orgID, upstreamID) {
 }
 
 /**
- * Get site environments available by ID.
+ * Get site environments (including multidev) available by ID.
  * @param {string} siteID
  * @returns object
  */
@@ -50,7 +62,8 @@ async function siteDomains(siteName) {
 }
 
 /**
- * Site List Data
+ * All Upstream site list as json data
+ *
  * @param {string} orgID
  * @param {string} siteID
  * @returns object
