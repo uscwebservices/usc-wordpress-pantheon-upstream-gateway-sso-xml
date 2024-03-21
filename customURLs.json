@@ -192,6 +192,22 @@
     "roski.usc.edu": {
       "urn": "roski.usc.edu",
       "location": "roski.usc.edu/wp-login.php?action=wp-saml-auth"
+    },
+    "dev-usc-graduate-admissions.pantheonsite.io": {
+      "urn": "dev-usc-graduate-admissions.pantheonsite.io",
+      "location": "dev-usc-graduate-admissions.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "test-usc-graduate-admissions.pantheonsite.io": {
+      "urn": "test-usc-graduate-admissions.pantheonsite.io",
+      "location": "test-usc-graduate-admissions.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "live-usc-graduate-admissions.pantheonsite.io": {
+      "urn": "live-usc-graduate-admissions.pantheonsite.io",
+      "location": "live-usc-graduate-admissions.pantheonsite.io/wp-login.php?action=wp-saml-auth"
+    },
+    "gradadm.usc.edu": {
+      "urn": "gradadm.usc.edu",
+      "location": "gradadm.usc.edu/wp-login.php?action=wp-saml-auth"
     }
   }
 }
