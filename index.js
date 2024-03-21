@@ -28,6 +28,20 @@ terminusUpstreams = process.env.TERMINUS_UPSTREAMS;
 
 
 /**
+ * Get all sites associated with a tag
+ *
+ * @param   {string}  orgID  Orgnaization ID in Pantheon
+ * @param   {string}  tag    Tag to query against sites
+ *
+ * @return  {object}         JSON format of
+ */
+async function ssoSiteList(orgID, tag) {
+    return new Promise(resolve => {
+		resolve( exec(`terminus org:site:list ${orgID} --tag=${tag} --fields=name,id --format=json`) );
+	});
+}
+
+/**
  * Organization Site List gets the list of sites for an upstream in JSON format with name and id
  * @param {string} orgID
  * @param {string} upstreamID
@@ -146,11 +160,11 @@ async function allSitesToXML() {
 
 	// Set empty arrays for names and ids
     let upstreamIDs = terminusUpstreams;
-    let allSitesData = {};
-    let names = [];
-    let ids = [];
-	let environments = [];
-	let domains = [];
+    let allSitesData = new Object();
+    let names = new Array();
+    let ids = new Array();
+	let environments = new Array();
+	let domains = new Array();
     const upstreamLoginAppend = '/wp/wp-login.php?action=wp-saml-auth';
 
     console.log('Establishing connection to Pantheon');
@@ -215,11 +229,13 @@ async function allSitesToXML() {
 
                 for (const entry of entries) {
                     if ( undefined !== entry[1].id ) {
-                        // domains.push(entry[1].id);
+
+                        // Data Sample: ["live-site.pantheonsite.io",{"id":"live-site.pantheonsite.io"}]
                         domains.push(
                             `{"urn": "${entry[1].id}", "location": "${entry[1].id}${upstreamLoginAppend}"}`
                         );
                         console.log(`Adding Domain: ${entry[1].id}`);
+
                     }
 
                     if ( undefined === entry[1].id ) {
@@ -244,6 +260,8 @@ async function allSitesToXML() {
 
                 for (const entry of entries) {
                     if ( undefined !== entry[1].domain ) {
+
+                        // Data Sample: ["dev",{"domain":"dev-site.pantheonsite.io"}]
                         environments.push(
                             `{"urn": "${entry[1].domain}", "location": "${entry[1].domain}${upstreamLoginAppend}"}`
                         );
