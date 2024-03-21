@@ -33,7 +33,7 @@ terminusUpstreams = process.env.TERMINUS_UPSTREAMS;
  * @param   {string}  orgID  Orgnaization ID in Pantheon
  * @param   {string}  tag    Tag to query against sites
  *
- * @return  {object}         JSON format of
+ * @return  {object}         Object of data for site
  */
 async function ssoSiteList(orgID, tag) {
     return new Promise(resolve => {
@@ -43,9 +43,11 @@ async function ssoSiteList(orgID, tag) {
 
 /**
  * Organization Site List gets the list of sites for an upstream in JSON format with name and id
- * @param {string} orgID
- * @param {string} upstreamID
- * @returns object
+ *
+ * @param   {string}  orgID       Orgnaization ID in Pantheon
+ * @param   {string}  upstreamID  ID of Upstream to query
+ *
+ * @return  {object}              Object of sites in upstream
  */
 async function orgSiteList(orgID, upstreamID) {
     return new Promise(resolve => {
@@ -55,8 +57,10 @@ async function orgSiteList(orgID, upstreamID) {
 
 /**
  * Get site environments (including multidev) available by ID.
- * @param {string} siteID
- * @returns object
+ *
+ * @param   {string}  siteID  Site ID to get envionments
+ *
+ * @return  {object}          Object of site envrionments
  */
 async function siteEnvironments(siteID) {
 	return new Promise(resolve => {
@@ -64,10 +68,13 @@ async function siteEnvironments(siteID) {
 	});
 }
 
+
 /**
  * Get site domains by base sitename.
- * @param {string} siteName
- * @returns object
+ *
+ * @param   {string}  siteName  Site Name to query
+ *
+ * @return  {object}            Object of Domains attached to live environment
  */
 async function siteDomains(siteName) {
 	return new Promise(resolve => {
@@ -75,12 +82,14 @@ async function siteDomains(siteName) {
 	});
 }
 
+
 /**
  * All Upstream site list as json data
  *
- * @param {string} orgID
- * @param {string} siteID
- * @returns object
+ * @param   {string}  orgID   Organization ID
+ * @param   {string}  siteID  Site ID
+ *
+ * @return  {object}          Object of Sites within Organization
  */
 async function siteListData(orgID, siteID) {
 
