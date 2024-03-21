@@ -85,6 +85,13 @@ async function siteListData(orgID, siteID) {
     return false;
 }
 
+
+/**
+ * All data to XML
+ *
+ * @param {object} sitesList
+ * @returns null
+ */
 async function createSitesXML(sitesList) {
 
     // Create XML format
@@ -159,6 +166,7 @@ async function allSitesToXML() {
 
         upstreamIDs = upstreamIDs.split(',');
 
+        // For each upstream, get the site data
         for (let i in upstreamIDs) {
 
             let results = await siteListData(terminusOrgID,upstreamIDs[i]);
