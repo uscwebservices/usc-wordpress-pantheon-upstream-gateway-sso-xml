@@ -126,11 +126,13 @@ async function terminusOrgSiteListUpstream(upstreamID) {
 }
 
 /**
- * Get site environments available by ID.
- * @param {string} siteID
- * @returns object
+ * Get site environments (including multidev) available by ID.
+ *
+ * @param   {string}  siteID  Site ID to get envionments
+ *
+ * @return  {object}          Object of site envrionments
  */
-async function siteEnvironments(siteID) {
+async function terminusEnvironmentList(siteID) {
 	return new Promise(resolve => {
 		resolve( exec(`terminus env:list --fields=domain --format=json ${siteID}`) );
 	});
