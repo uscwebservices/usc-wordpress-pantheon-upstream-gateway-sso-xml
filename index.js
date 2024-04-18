@@ -198,6 +198,7 @@ function getSiteTypes(cms = 'wordpress', api = 'upstream', webDirectory = true) 
             'cms':cms,
             'api':api,
             'tagName':tagName + tagNameDir,
+            'ids':'',
             'appendUrl':appendURL
         }
     );
@@ -432,7 +433,6 @@ async function getCustomURLs() {
 async function allSitesToXML() {
 
     let fullSiteList = new Array;
-    let defaultID = '';
 
     // Preset WordPress site types by Tag or Upstream
     let wordpressUpstreamWeb = getSiteTypes('wordpress', 'upstream', true);
@@ -451,12 +451,6 @@ async function allSitesToXML() {
     wordpressUpstreamRoot.ids = terminusWordpressUpstreamRoot;
     drupalUpstreamWeb.ids = terminusDrupalUpstreamWeb;
     drupalUpstreamRoot.ids = terminusDrupalUpstreamRoot;
-
-    // Assign upstream IDs for Tags
-    wordpressTagWeb.ids = defaultID;
-    wordpressTagRoot.ids = defaultID;
-    drupalTagWeb.ids = defaultID;
-    drupalTagRoot.ids = defaultID;
 
     // Get all of the types of sites
     let wordpressTagRootFn = await getAllSitesByType(wordpressTagRoot);
