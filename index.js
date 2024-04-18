@@ -229,6 +229,37 @@ async function createSitesXML(sitesList) {
     });
 }
 
+/**
+ * Get stdout data and convert to JSON
+ *
+ * @param   {string}  data  String of data in Object formatting
+ *
+ * @return  {object}        Object of data
+ */
+function getJSONstdout(data) {
+
+    try {
+        if ( 'undefined' === typeof(data) || 'object' !== typeof(data)) throw "getJSONstdout: data is not set";
+    }
+    catch(err) {
+        console.error(err);
+        return;
+    }
+
+    if (false === data.stderr) {
+        console.log(data.stderr);
+    }
+
+    // Convert string to JSON Object
+    if (false !== data.stderr) {
+
+       return JSON.parse(data.stdout);
+
+    }
+
+    return false;
+}
+
 
 /**
  * Get all sites and compose XML output
