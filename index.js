@@ -272,6 +272,14 @@ async function getAllSitesByType (obj)   {
         allSitesData = Object.assign( allSitesData, getJSONstdout(results) );
     }
 
+    console.log(obj.api);
+    console.log(upstreamIDs);
+
+    if ('' !== upstreamIDs){
+        console.log('"" === upstreamIDs');
+    }
+
+
     if ( 'upstream' === obj.api && 'string' === typeof(upstreamIDs) && '' !== upstreamIDs ) {
         upstreamIDs = upstreamIDs.split(',');
 
