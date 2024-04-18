@@ -473,15 +473,15 @@ async function allSitesToXML() {
     drupalUpstreamRoot.ids = terminusDrupalUpstreamRoot;
 
     // Get all of the types of sites
-    let wordpressTagRootFn = await getAllSitesByType(wordpressTagRoot);
-    let wordpressTagWebFn = await getAllSitesByType(wordpressTagWeb);
-    let wordpressUpstreamRootFn = await getAllSitesByType(wordpressUpstreamRoot);
-    let wordpressUpstreamWebFn = await getAllSitesByType(wordpressUpstreamWeb);
-
     let drupalTagRootFn = await getAllSitesByType(drupalTagRoot);
     let drupalTagWebFn = await getAllSitesByType(drupalTagWeb);
     let drupalUpstreamRootFn = await getAllSitesByType(drupalUpstreamRoot);
     let drupalUpstreamWebFn = await getAllSitesByType(drupalUpstreamWeb);
+
+    let wordpressTagRootFn = await getAllSitesByType(wordpressTagRoot);
+    let wordpressTagWebFn = await getAllSitesByType(wordpressTagWeb);
+    let wordpressUpstreamRootFn = await getAllSitesByType(wordpressUpstreamRoot);
+    let wordpressUpstreamWebFn = await getAllSitesByType(wordpressUpstreamWeb);
 
     // Get Custom URLs
     let getCustomURLsFn =   await getCustomURLs();
