@@ -274,13 +274,22 @@ async function getAllSitesByType (obj)   {
 
     console.log(obj.api);
     console.log(upstreamIDs);
+    console.log(typeof(upstreamIDs));
 
     if ('' !== upstreamIDs){
-        console.log('"" === upstreamIDs');
+        console.log('1');
+    }
+
+    if ('string' === typeof(upstreamIDs)){
+        console.log('2');
+    }
+
+    if ('' !== upstreamIDs){
+        console.log('3');
     }
 
 
-    if ( 'upstream' === obj.api && 'string' === typeof(upstreamIDs) && '' !== upstreamIDs ) {
+    if ( 'upstream' === obj.api && '' !== upstreamIDs ) {
         upstreamIDs = upstreamIDs.split(',');
 
         // For each upstream, get the site data
