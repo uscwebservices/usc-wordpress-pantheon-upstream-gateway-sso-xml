@@ -267,6 +267,7 @@ async function getAllSitesByType (obj)   {
     let upstreamLoginAppend = obj.appendUrl;
 
     if ( 'tag' === obj.api) {
+        console.log("running tag");
         let results = await terminusOrgSiteListTag(obj.tagName);
 
         allSitesData = Object.assign( allSitesData, getJSONstdout(results) );
@@ -275,21 +276,12 @@ async function getAllSitesByType (obj)   {
     console.log(obj.api);
     console.log(upstreamIDs);
     console.log(typeof(upstreamIDs));
-
-    if ('' !== upstreamIDs){
-        console.log('1');
-    }
-
-    if ('string' === typeof(upstreamIDs)){
-        console.log('2');
-    }
-
-    if ('' !== upstreamIDs){
-        console.log('3');
-    }
+    console.log(upstreamIDs.length);
 
 
     if ( 'upstream' === obj.api && '' !== upstreamIDs ) {
+
+        console.log("running upstream");
         upstreamIDs = upstreamIDs.split(',');
 
         // For each upstream, get the site data
