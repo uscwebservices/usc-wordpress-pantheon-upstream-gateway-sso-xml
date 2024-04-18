@@ -17,19 +17,17 @@
   },
   "homepage": "https://github.com/uscwebservices/usc-wordpress-pantheon-upstream-gateway-sso-xml#readme",
   "devDependencies": {
-    "fs": "^0.0.1-security",
-    "xmlbuilder2": "^3.0.2",
-    "@commitlint/cli": "^11.0.0",
+    "@commitlint/cli": "^19.2.2",
     "@commitlint/config-conventional": "^11.0.0",
     "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/git": "^9.0.0",
     "@semantic-release/github": "^7.1.1",
     "@semantic-release/npm": "^7.0.6",
     "@semantic-release/release-notes-generator": "^9.0.1",
+    "fs": "^0.0.1-security",
     "husky": "^4.3.0",
-    "pa11y": "^5.3.1",
-    "pa11y-ci": "^2.4.0",
-    "semantic-release": "^17.4.2"
+    "semantic-release": "^23.0.8",
+    "xmlbuilder2": "^3.0.2"
   },
   "release": {
     "plugins": [
