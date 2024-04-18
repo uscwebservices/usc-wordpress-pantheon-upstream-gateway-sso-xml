@@ -113,14 +113,15 @@ async function terminusOrgSiteListTag(tag) {
 }
 
 /**
- * Organization Site List
- * @param {string} orgID
- * @param {string} upstreamID
- * @returns object
+ * Organization Site List gets the list of sites for an upstream in JSON format with name and id
+ *
+ * @param   {string}  upstreamID  ID of Upstream to query
+ *
+ * @return  {object}              Object of sites in upstream
  */
-async function orgSiteList(orgID, upstreamID) {
+async function terminusOrgSiteListUpstream(upstreamID) {
     return new Promise(resolve => {
-		resolve( exec(`terminus org:site:list ${orgID} --upstream=${upstreamID} --fields=name,id --format=json`) );
+		resolve( exec(`terminus org:site:list ${terminusOrgID} --upstream=${upstreamID} --fields=name,id --format=json`) );
 	});
 }
 
