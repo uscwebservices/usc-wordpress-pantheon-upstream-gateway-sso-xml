@@ -278,8 +278,19 @@ async function getAllSitesByType (obj)   {
     console.log(typeof(upstreamIDs));
     console.log(upstreamIDs.length);
 
+    if ( 'upstream' === obj.api ) {
+        console.log('upsteam === obj.api');
+    }
 
-    if ( 'upstream' === obj.api && '' !== upstreamIDs ) {
+    if ( '' !== upstreamIDs ) {
+        console.log('"" !== upstreamIDs');
+    }
+
+    if ( 'upstream' === obj.api && '' !== upstreamIDs && upstreamIDs.length > 3 ) {
+        console.log('upstreamIDs.length > 3');
+    }
+
+    if ( 'upstream' === obj.api && '' !== upstreamIDs && upstreamIDs.length > 3 ) {
 
         console.log("running upstream");
         upstreamIDs = upstreamIDs.split(',');
