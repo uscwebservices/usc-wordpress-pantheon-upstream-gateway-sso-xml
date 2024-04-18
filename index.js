@@ -23,7 +23,10 @@ const fs = require('fs');
 
 // Set variables from shell environment for Organization and Upstream IDs
 const terminusOrgID = process.env.TERMINUS_ORG_ID,
-terminusUpstreams = process.env.TERMINUS_UPSTREAMS
+terminusWordpressUpstreamWeb = process.env.TERMINUS_UPSTREAMS_WORDPRESS_WEB,
+terminusWordpressUpstreamRoot = process.env.TERMINUS_UPSTREAMS_WORDPRESS_ROOT,
+terminusDrupalUpstreamWeb = process.env.TERMINUS_UPSTREAMS_DRUPAL_WEB,
+terminusDrupalUpstreamRoot = process.env.TERMINUS_UPSTREAMS_DRUPAL_ROOT;
 
 /**
  * Organization Site List
