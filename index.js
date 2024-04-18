@@ -260,6 +260,158 @@ function getJSONstdout(data) {
     return false;
 }
 
+/**
+ * Get all associated URL's by API type
+ *
+ * @param   {object}  obj          Object of data type {cms:wordpress, api:upstream, tagName:sso-wp-web, appendURL:url-path}
+ * @param   {array}  upstreamIDs   Array of upstream IDs to check by cms and web directory type
+ *
+ * @return  {array}                Array of urn and url locations
+ */
+async function getAllSitesByType (obj)   {
+
+    try {
+        if ( 'undefined' === typeof(obj) || 'object' !== typeof(obj)) throw "getAllSitesByType: obj is not set";
+        if ( 'undefined' === typeof(obj.ids) ) throw "getAllSitesByType: obj.ids is not set";
+        if ( 'undefined' === typeof(obj.appendUrl) ) throw "getAllSitesByType: obj.appendUrl is not set";
+    }
+    catch(err) {
+        console.error(err);
+    }
+
+    console.log('Starting to process ' + obj.cms + ': ' + obj.api + ': ' + obj.tagName);
+
+    let allSitesData = new Object();
+    let names = new Array();
+    let ids = new Array();
+	let environments = new Array();
+	let domains = new Array();
+    let upstreamIDs = obj.ids;
+    let upstreamLoginAppend = obj.appendUrl;
+
+    if ( 'tag' === obj.api) {
+        let results = await terminusOrgSiteListTag(obj.tagName);
+
+        allSitesData = Object.assign( allSitesData, getJSONstdout(results) );
+    }
+
+    if ( 'upstream' === obj.api && 'string' === typeof(upstreamIDs) && '' !== upstreamIDs ) {
+        upstreamIDs = upstreamIDs.split(',');
+
+        // For each upstream, get the site data
+        for (let i in upstreamIDs) {
+
+            // let results = await siteListData(terminusOrgID,upstreamIDs[i]);
+
+            let results = await terminusOrgSiteListUpstream(upstreamIDs[i]);
+
+            allSitesData = Object.assign( allSitesData, getJSONstdout(results) );
+
+        }
+
+    }
+
+    // Convert Object to Array of Objects
+    const entries = Object.entries(allSitesData);
+
+    // TODO: set as separate function
+    for (const entry of entries) {
+
+        if ( undefined !== entry[1].name ) {
+            names.push(entry[1].name);
+            console.log('pushing name:' + entry[1].name);
+        }
+        if ( undefined === entry[1].name ) {
+            console.log('prod upstream undefined: entry[1].name');
+        }
+
+
+        if ( undefined !== entry[1].id ) {
+            ids.push(entry[1].id);
+            console.log('pushing id for:' + entry[1].name);
+        }
+        if ( undefined === entry[1].id ) {
+            console.log('prod upstream undefined: entry[1].id');
+        }
+    }
+
+    // TODO: set as separate function
+    // Get domains associated with live environments
+    for (const name of names) {
+        const result = await terminusDomainList(name);
+
+        if (false === result.stderr) {
+            console.log(result.stderr);
+        }
+
+        if (false !== result.stderr) {
+            const siteDomains = JSON.parse(result.stdout);
+
+            const entries = Object.entries(siteDomains);
+
+            for (const entry of entries) {
+                if ( undefined !== entry[1].id ) {
+
+                    // Data Sample: ["live-site.pantheonsite.io",{"id":"live-site.pantheonsite.io"}]
+                    domains.push(
+                        `{"urn": "${entry[1].id}", "location": "${entry[1].id}${upstreamLoginAppend}"}`
+                    );
+                    console.log(`Adding Domain: ${entry[1].id}`);
+
+                }
+
+                if ( undefined === entry[1].id ) {
+                    console.log(`Failure to add Domain: ${entry[1]}`);
+                }
+            }
+        }
+    }
+
+    // TODO: set as separate function
+    // Get environments associated with sites
+    for (const id of ids) {
+        const result = await terminusEnvironmentList(id);
+
+        if (false === result.stderr) {
+            console.log(result.stderr);
+        }
+
+        if (false !== result.stderr) {
+            const siteEnvs = JSON.parse(result.stdout);
+
+            const entries = Object.entries(siteEnvs);
+
+            for (const entry of entries) {
+                if ( undefined !== entry[1].domain ) {
+
+                    // Data Sample: ["dev",{"domain":"dev-site.pantheonsite.io"}]
+                    environments.push(
+                        `{"urn": "${entry[1].domain}", "location": "${entry[1].domain}${upstreamLoginAppend}"}`
+                    );
+                    console.log(`Adding Environment: ${entry[1].domain}`);
+                }
+            }
+        }
+    }
+
+     // Set data as an Object
+    //  const fullSiteList = new Object;
+    //  fullSiteList.sites = domains.concat(environments);
+    //  const exportSitesList = fullSiteList.sites;
+
+    /**
+     * So, yes, it used to be an object but it was easier
+     * to parse an array in allSitesToXML when combining
+     * multiple streams to pass to XML generator.
+     */
+
+     // Return array
+
+    return domains.concat(environments);
+
+
+}
+
 
 /**
  * Get all sites and compose XML output
