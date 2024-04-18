@@ -152,14 +152,17 @@ async function terminusDomainList(siteName) {
 }
 
 /**
- * Site List Data
- * @param {string} orgID
- * @param {string} siteID
- * @returns object
+/**
+ * All Upstream site list as json data
+ *
+ * @param   {string}  orgID   Organization ID
+ * @param   {string}  siteID  Site ID
+ *
+ * @return  {object}          Object of Sites within Organization
  */
 async function siteListData(orgID, siteID) {
 
-    const result = await orgSiteList(orgID, siteID);
+    const result = await terminusOrgSiteListUpstream(siteID);
 
 	if (false === result.stderr) {
 		console.log(result.stderr);
