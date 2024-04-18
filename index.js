@@ -412,6 +412,41 @@ async function getAllSitesByType (obj)   {
 
 }
 
+/**
+ * Get Custom URLs from customURLs.json
+ *
+ * @return  {object}  object of custom site urls
+ */
+async function getCustomURLs() {
+
+    let domains = new Array();
+
+    const customURLsFile = require('./customURLs.json');
+    const customURLs = Object.entries(customURLsFile.sites);
+
+    if ( undefined !== customURLs) {
+        for (const url of customURLs) {
+            domains.push(
+                `{"urn": "${url[1].urn}", "location": "${url[1].location}"}`
+            );
+            console.log(`Adding Custom URL: ${url[1].urn}`);
+        }
+
+    }
+
+    const fullSiteList = new Object;
+    fullSiteList.sites = domains;
+    const exportSitesList = fullSiteList.sites;
+
+    /**
+     * So, yes, it used to be an object but it was easier
+     * to parse an array in allSitesToXML when combining
+     * multiple streams to pass to XML generator.
+     */
+
+    return domains;
+}
+
 
 /**
  * Get all sites and compose XML output
