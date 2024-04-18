@@ -177,6 +177,58 @@ async function siteListData(orgID, siteID) {
     return false;
 }
 
+/**
+ * Convert all site data to XML format
+ *
+ * @param   {object}  sitesList  Object of all sites and their associated urls
+ *
+ * @return  null                 Outputs XML file
+ */
+async function createSitesXML(sitesList) {
+
+    // Create XML format
+    const root = create({ version: '1.0' })
+    .ele('md:EntitiesDescriptor', {
+            'xmlns:md': 'urn:oasis:names:tc:SAML:2.0:metadata',
+            'xmlns:mdui':'urn:oasis:names:tc:SAML:2.0:metadata:ui',
+            'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+            'xmlns:ds': 'http://www.w3.org/2000/09/xmldsig#',
+            'xsi:schemaLocation': 'urn:oasis:names:tc:SAML:2.0:metadata ../schemas/saml-schema-metadata-2.0.xsd urn:mace:shibboleth:metadata:1.0 ../schemas/shibboleth-metadata-1.0.xsd http://www.w3.org/2000/09/xmldsig# ../schemas/xmldsig-core-schema.xsd',
+            'Name': 'https://www.usc.edu/its/pantheon'
+        })
+
+    let siteIndex = 0;
+    for (const siteData of sitesList){
+
+        // const site = Object.entries(fullSiteList.sites[i]);
+        const site = JSON.parse(siteData);
+
+        const entityDesc = root.ele('md:EntityDescriptor');
+
+        // entityDesc.att('entityID', `urn:${fullSiteList.sites[i].urn}`)
+        entityDesc.att('entityID', `urn:${site.urn}`)
+            .ele('md:SPSSODescriptor', {
+                'AuthnRequestsSigned': 'false',
+                'WantAssertionsSigned': 'true',
+                'protocolSupportEnumeration': 'urn:oasis:names:tc:SAML:2.0:protocol'
+            })
+                .ele('md:AssertionConsumerService', {
+                    'Binding': 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
+                    'Location': `https://${site.location}`,
+                    'index': `${siteIndex}`
+                })
+        siteIndex++;
+    }
+
+    const xml = root.end({ prettyPrint: true });
+
+    // Output XML to file.
+    let full_file_name = "./usc-pantheon-gateway-sso.xml";
+    fs.writeFileSync(full_file_name, xml, function(err) {
+        if (err) throw err;
+    });
+}
+
 
 /**
  * Get all sites and compose XML output
