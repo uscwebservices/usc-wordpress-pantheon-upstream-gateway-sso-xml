@@ -152,32 +152,6 @@ async function terminusDomainList(siteName) {
 }
 
 /**
-/**
- * All Upstream site list as json data
- *
- * @param   {string}  orgID   Organization ID
- * @param   {string}  siteID  Site ID
- *
- * @return  {object}          Object of Sites within Organization
- */
-async function siteListData(orgID, siteID) {
-
-    const result = await terminusOrgSiteListUpstream(siteID);
-
-	if (false === result.stderr) {
-		console.log(result.stderr);
-	}
-
-	// Convert string to JSON Object
-	if (false !== result.stderr) {
-
-        return JSON.parse(result.stdout);
-
-	}
-    return false;
-}
-
-/**
  * Convert all site data to XML format
  *
  * @param   {object}  sitesList  Object of all sites and their associated urls
