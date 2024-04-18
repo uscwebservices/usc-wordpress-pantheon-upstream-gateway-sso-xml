@@ -99,6 +99,20 @@ function getSiteTypes(cms = 'wordpress', api = 'upstream', webDirectory = true) 
 }
 
 /**
+ * Get all sites associated with a tag
+ *
+ * @param   {string}  orgID  Orgnaization ID in Pantheon
+ * @param   {string}  tag    Tag to query against sites
+ *
+ * @return  {object}         Object of data for site
+ */
+async function terminusOrgSiteListTag(tag) {
+    return new Promise(resolve => {
+		resolve( exec(`terminus org:site:list ${terminusOrgID} --tag=${tag} --fields=name,id --format=json`) );
+	});
+}
+
+/**
  * Organization Site List
  * @param {string} orgID
  * @param {string} upstreamID
