@@ -22,11 +22,12 @@ const { create } = require('xmlbuilder2');
 const fs = require('fs');
 
 // Set variables from shell environment for Organization and Upstream IDs
-const terminusOrgID = process.env.TERMINUS_ORG_ID.trim(),
-terminusWordpressUpstreamWeb = process.env.TERMINUS_UPSTREAMS_WORDPRESS_WEB.trim(),
-terminusWordpressUpstreamRoot = process.env.TERMINUS_UPSTREAMS_WORDPRESS_ROOT.trim(),
-terminusDrupalUpstreamWeb = process.env.TERMINUS_UPSTREAMS_DRUPAL_WEB.trim(),
-terminusDrupalUpstreamRoot = process.env.TERMINUS_UPSTREAMS_DRUPAL_ROOT.trim();
+const envRegex = /["']/g,
+terminusOrgID = process.env.TERMINUS_ORG_ID.trim(),
+terminusWordpressUpstreamWeb = process.env.TERMINUS_UPSTREAMS_WORDPRESS_WEB.trim().replace(envRegex, ""),
+terminusWordpressUpstreamRoot = process.env.TERMINUS_UPSTREAMS_WORDPRESS_ROOT.trim().replace(envRegex, ""),
+terminusDrupalUpstreamWeb = process.env.TERMINUS_UPSTREAMS_DRUPAL_WEB.trim().replace(envRegex, ""),
+terminusDrupalUpstreamRoot = process.env.TERMINUS_UPSTREAMS_DRUPAL_ROOT.trim().replace(envRegex, "");
 
 
 /**
@@ -267,38 +268,22 @@ async function getAllSitesByType (obj)   {
     let upstreamLoginAppend = obj.appendUrl;
 
     if ( 'tag' === obj.api) {
+
         console.log("running tag");
+
         let results = await terminusOrgSiteListTag(obj.tagName);
 
         allSitesData = Object.assign( allSitesData, getJSONstdout(results) );
     }
 
-    console.log(obj.api);
-    console.log(upstreamIDs);
-    console.log(typeof(upstreamIDs));
-    console.log(upstreamIDs.length);
-
-    if ( 'upstream' === obj.api ) {
-        console.log('upsteam === obj.api');
-    }
-
-    if ( '' !== upstreamIDs ) {
-        console.log('"" !== upstreamIDs');
-    }
-
-    if ( 'upstream' === obj.api && '' !== upstreamIDs && upstreamIDs.length > 3 ) {
-        console.log('upstreamIDs.length > 3');
-    }
-
-    if ( 'upstream' === obj.api && '' !== upstreamIDs && upstreamIDs.length > 3 ) {
+    if ( 'upstream' === obj.api && 0 !== upstreamIDs.length ) {
 
         console.log("running upstream");
+
         upstreamIDs = upstreamIDs.split(',');
 
         // For each upstream, get the site data
         for (let i in upstreamIDs) {
-
-            // let results = await siteListData(terminusOrgID,upstreamIDs[i]);
 
             let results = await terminusOrgSiteListUpstream(upstreamIDs[i]);
 
