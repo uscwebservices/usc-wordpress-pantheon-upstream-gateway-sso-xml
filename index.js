@@ -29,6 +29,76 @@ terminusDrupalUpstreamWeb = process.env.TERMINUS_UPSTREAMS_DRUPAL_WEB,
 terminusDrupalUpstreamRoot = process.env.TERMINUS_UPSTREAMS_DRUPAL_ROOT;
 
 /**
+ * Get the type of api and appening url
+ *
+ * @param   {string}  cms           type of cms: drupal, wordpress (default)
+ * @param   {string}  type          api call to make: tag, upstream (default)
+ * @param   {boolean}  webDirectory include web diretory: false, true (default)
+ *
+ * @return  {object}                object of values
+ */
+function getSiteTypes(cms = 'wordpress', api = 'upstream', webDirectory = true) {
+
+    try {
+        if ( 'undefined' === typeof(cms) || '' === cms ) throw "getSiteTypes: cms is not set";
+        if ( 'undefined' === typeof(api) || '' === api ) throw "getSiteTypes: api is not set";
+        if ( 'undefined' === typeof(webDirectory) || '' === webDirectory ) throw "getSiteTypes: webDirectory is not set";
+    }
+    catch(err) {
+        console.error(err);
+    }
+
+
+    let prependURL = appendURL = '';
+    let tagName = 'sso-';
+    let tagNameDir = 'root';
+    let obj = new Object;
+
+    if ( 'undefined' === typeof(webDirectory) || '' === webDirectory ) {
+        // you should really be using web directory for security
+        webDirectory = true;
+    }
+
+    switch(cms) {
+        case 'drupal':
+            tagName += 'drupal-';
+            prependURL = '/web';
+            appendURL = '/user/login/';
+            break;
+        default:
+            tagName += 'wp-';
+            prependURL = '/wp';
+            appendURL = '/wp-login.php?action=wp-saml-auth';
+            break;
+    }
+
+    switch (api) {
+        case 'tag':
+            api = 'tag';
+            break;
+        default:
+            api = 'upstream';
+            break;
+    }
+
+    if ( true === webDirectory ) {
+        appendURL = prependURL + appendURL;
+        tagNameDir = 'web';
+    }
+
+    obj = Object.assign( obj,
+        {
+            'cms':cms,
+            'api':api,
+            'tagName':tagName + tagNameDir,
+            'appendUrl':appendURL
+        }
+    );
+
+    return obj;
+}
+
+/**
  * Organization Site List
  * @param {string} orgID
  * @param {string} upstreamID
