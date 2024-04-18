@@ -22,11 +22,11 @@ const { create } = require('xmlbuilder2');
 const fs = require('fs');
 
 // Set variables from shell environment for Organization and Upstream IDs
-const terminusOrgID = process.env.TERMINUS_ORG_ID,
-terminusWordpressUpstreamWeb = process.env.TERMINUS_UPSTREAMS_WORDPRESS_WEB,
-terminusWordpressUpstreamRoot = process.env.TERMINUS_UPSTREAMS_WORDPRESS_ROOT,
-terminusDrupalUpstreamWeb = process.env.TERMINUS_UPSTREAMS_DRUPAL_WEB,
-terminusDrupalUpstreamRoot = process.env.TERMINUS_UPSTREAMS_DRUPAL_ROOT;
+const terminusOrgID = process.env.TERMINUS_ORG_ID.trim(),
+terminusWordpressUpstreamWeb = process.env.TERMINUS_UPSTREAMS_WORDPRESS_WEB.trim(),
+terminusWordpressUpstreamRoot = process.env.TERMINUS_UPSTREAMS_WORDPRESS_ROOT.trim(),
+terminusDrupalUpstreamWeb = process.env.TERMINUS_UPSTREAMS_DRUPAL_WEB.trim(),
+terminusDrupalUpstreamRoot = process.env.TERMINUS_UPSTREAMS_DRUPAL_ROOT.trim();
 
 
 /**
