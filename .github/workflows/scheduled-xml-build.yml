@@ -90,11 +90,11 @@ jobs:
 
             @uscwebservices/software-engineering-web
 
-  # automerge:
-  #   runs-on: ubuntu-latest
-  #   needs: [scheduled_xml]
-  #   steps:
-  #     - name: automerge
-  #       uses: 'pascalgn/automerge-action@v0.16.3'
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
+  automerge:
+    runs-on: ubuntu-latest
+    needs: [scheduled_xml]
+    steps:
+      - name: automerge
+        uses: 'pascalgn/automerge-action@v0.16.3'
+        env:
+          GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
