@@ -449,183 +449,61 @@ async function getCustomURLs() {
 
 
 /**
- * Get all sites and compose XML output
+ * Function to process the different types of site lists and export XML
+ *
+ * @return  {null}  Passes data to createsSitesXML
  */
 async function allSitesToXML() {
 
-	// Set empty arrays for names and ids
-    let upstreamIDs = terminusUpstreams;
-    let allSitesData = {};
-    let names = [];
-    let ids = [];
-	let environments = [];
-	let domains = [];
-    const upstreamLoginAppend = '/wp/wp-login.php?action=wp-saml-auth';
+    let fullSiteList = new Array;
+    let defaultID = '';
 
-    console.log('Establishing connection to Pantheon');
+    // Preset WordPress site types by Tag or Upstream
+    let wordpressUpstreamWeb = getSiteTypes('wordpress', 'upstream', true);
+    let wordpressUpstreamRoot = getSiteTypes('wordpress', 'upstream', false);
+    let wordpressTagWeb = getSiteTypes('wordpress', 'tag', true);
+    let wordpressTagRoot = getSiteTypes('wordpress', 'tag', false);
 
-    try {
-        if ( 'undefined' === typeof(terminusUpstreams) ) throw "Upstream IDs secret is not set";
-    }
-    catch(err) {
-        console.error(err);
-    }
+    // Preset Drupal site types by Tag or Upstream
+    let drupalUpstreamWeb = getSiteTypes('drupal', 'upstream', true);
+    let drupalUpstreamRoot = getSiteTypes('drupal', 'upstream', false);
+    let drupalTagWeb = getSiteTypes('drupal', 'tag', true);
+    let drupalTagRoot = getSiteTypes('drupal', 'tag', false);
 
-    if ( 'string' === typeof(upstreamIDs) && 0 !== upstreamIDs ) {
+    // Assign upstream IDs
+    wordpressUpstreamWeb.ids = terminusWordpressUpstreamWeb;
+    wordpressUpstreamRoot.ids = terminusWordpressUpstreamRoot;
+    drupalUpstreamWeb.ids = terminusDrupalUpstreamWeb;
+    drupalUpstreamRoot.ids = terminusDrupalUpstreamRoot;
 
-        upstreamIDs = upstreamIDs.split(',');
+    // Assign upstream IDs for Tags
+    wordpressTagWeb.ids = defaultID;
+    wordpressTagRoot.ids = defaultID;
+    drupalTagWeb.ids = defaultID;
+    drupalTagRoot.ids = defaultID;
 
-        for (let i in upstreamIDs) {
+    // Get all of the types of sites
+    let wordpressTagRootFn = await getAllSitesByType(wordpressTagRoot);
+    let wordpressTagWebFn = await getAllSitesByType(wordpressTagWeb);
+    let wordpressUpstreamRootFn = await getAllSitesByType(wordpressUpstreamRoot);
+    let wordpressUpstreamWebFn = await getAllSitesByType(wordpressUpstreamWeb);
 
-            let results = await siteListData(terminusOrgID,upstreamIDs[i]);
+    let drupalTagRootFn = await getAllSitesByType(drupalTagRoot);
+    let drupalTagWebFn = await getAllSitesByType(drupalTagWeb);
+    let drupalUpstreamRootFn = await getAllSitesByType(drupalUpstreamRoot);
+    let drupalUpstreamWebFn = await getAllSitesByType(drupalUpstreamWeb);
 
-            allSitesData = Object.assign(allSitesData, results);
+    // Get Custom URLs
+    let getCustomURLsFn =   await getCustomURLs();
 
-        }
-
-        // Convert Object to Array of Objects
-        const entries = Object.entries(allSitesData);
-
-        console.log('Sites using upstreams: ' + entries.length);
-
-        for (const entry of entries) {
-
-			if ( undefined !== entry[1].name ) {
-				names.push(entry[1].name);
-				console.log('pushing name:' + entry[1].name);
-			}
-			if ( undefined === entry[1].name ) {
-				console.log('prod upstream undefined: entry[1].name');
-			}
+    // Bring all the URLs together
+    fullSiteList = fullSiteList.concat(wordpressTagRootFn, wordpressTagWebFn, wordpressUpstreamRootFn, wordpressUpstreamWebFn, drupalTagRootFn, drupalTagWebFn, drupalUpstreamRootFn, drupalUpstreamWebFn, getCustomURLsFn);
 
 
-			if ( undefined !== entry[1].id ) {
-				ids.push(entry[1].id);
-				console.log('pushing id for:' + entry[1].name);
-			}
-			if ( undefined === entry[1].id ) {
-				console.log('prod upstream undefined: entry[1].id');
-			}
-		}
-
-        // Get domains associated with live environments
-        for (const name of names) {
-            const result = await siteDomains(name);
-
-            if (false === result.stderr) {
-                console.log(result.stderr);
-            }
-
-            if (false !== result.stderr) {
-                const siteDomains = JSON.parse(result.stdout);
-
-                const entries = Object.entries(siteDomains);
-
-                for (const entry of entries) {
-                    if ( undefined !== entry[1].id ) {
-                        // domains.push(entry[1].id);
-                        domains.push(
-                            `{"urn": "${entry[1].id}", "location": "${entry[1].id}${upstreamLoginAppend}"}`
-                        );
-                        console.log(`Adding Domain: ${entry[1].id}`);
-                    }
-
-                    if ( undefined === entry[1].id ) {
-                        console.log(`Failure to add Domain: ${entry[1]}`);
-                    }
-                }
-            }
-        }
-
-        // Get environments associated with sites
-        for (const id of ids) {
-            const result = await siteEnvironments(id);
-
-            if (false === result.stderr) {
-                console.log(result.stderr);
-            }
-
-            if (false !== result.stderr) {
-                const siteEnvs = JSON.parse(result.stdout);
-
-                const entries = Object.entries(siteEnvs);
-
-                for (const entry of entries) {
-                    if ( undefined !== entry[1].domain ) {
-                        environments.push(
-                            `{"urn": "${entry[1].domain}", "location": "${entry[1].domain}${upstreamLoginAppend}"}`
-                        );
-                        console.log(`Adding Environment: ${entry[1].domain}`);
-                    }
-                }
-            }
-        }
-
-        // Add manual site list
-		const customURLsFile = require('./customURLs.json');
-        const customURLs = Object.entries(customURLsFile.sites);
-
-		if ( undefined !== customURLs) {
-			for (const url of customURLs) {
-				domains.push(
-                    `{"urn": "${url[1].urn}", "location": "${url[1].location}"}`
-                );
-                console.log(`Adding Custom URL: ${url[1].urn}`);
-			}
-
-		}
-
-        // Set data as an Object
-        const fullSiteList = new Object;
-        fullSiteList.sites = domains.concat(environments);
-        const sitesList = fullSiteList.sites;
-
-        // Create XML format
-        const root = create({ version: '1.0' })
-            .ele('md:EntitiesDescriptor', {
-                    'xmlns:md': 'urn:oasis:names:tc:SAML:2.0:metadata',
-                    'xmlns:mdui':'urn:oasis:names:tc:SAML:2.0:metadata:ui',
-                    'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
-                    'xmlns:ds': 'http://www.w3.org/2000/09/xmldsig#',
-                    'xsi:schemaLocation': 'urn:oasis:names:tc:SAML:2.0:metadata ../schemas/saml-schema-metadata-2.0.xsd urn:mace:shibboleth:metadata:1.0 ../schemas/shibboleth-metadata-1.0.xsd http://www.w3.org/2000/09/xmldsig# ../schemas/xmldsig-core-schema.xsd',
-                    'Name': 'https://www.usc.edu/its/pantheon'
-                })
-
-            let siteIndex = 0;
-            for (const siteData of sitesList){
-
-                // const site = Object.entries(fullSiteList.sites[i]);
-                const site = JSON.parse(siteData);
-
-                const entityDesc = root.ele('md:EntityDescriptor');
-
-                // entityDesc.att('entityID', `urn:${fullSiteList.sites[i].urn}`)
-                entityDesc.att('entityID', `urn:${site.urn}`)
-                    .ele('md:SPSSODescriptor', {
-                        'AuthnRequestsSigned': 'false',
-                        'WantAssertionsSigned': 'true',
-                        'protocolSupportEnumeration': 'urn:oasis:names:tc:SAML:2.0:protocol'
-                    })
-                        .ele('md:AssertionConsumerService', {
-                            'Binding': 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
-                            'Location': `https://${site.location}`,
-                            'index': `${siteIndex}`
-                        })
-                siteIndex++;
-            }
-
-            const xml = root.end({ prettyPrint: true });
-
-            // Output XML to file.
-            let full_file_name = "./usc-pantheon-gateway-sso.xml";
-            fs.writeFileSync(full_file_name, xml, function(err) {
-                if (err) throw err;
-            });
-
-    }
-
+    createSitesXML(fullSiteList);
 
 }
+
 
 // Fetch all sites and create XML
 allSitesToXML();
