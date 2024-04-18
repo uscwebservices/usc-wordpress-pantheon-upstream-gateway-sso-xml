@@ -140,10 +140,12 @@ async function terminusEnvironmentList(siteID) {
 
 /**
  * Get site domains by base sitename.
- * @param {string} siteName
- * @returns object
+ *
+ * @param   {string}  siteName  Site Name to query
+ *
+ * @return  {object}            Object of Domains attached to live environment
  */
-async function siteDomains(siteName) {
+async function terminusDomainList(siteName) {
 	return new Promise(resolve => {
 		resolve( exec(`terminus domain:list --fields=id --format=json -- ${siteName}.live`) );
 	});
