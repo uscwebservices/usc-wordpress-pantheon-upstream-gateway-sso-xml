@@ -29,6 +29,8 @@ terminusWordpressUpstreamRoot = process.env.TERMINUS_UPSTREAMS_WORDPRESS_ROOT.tr
 terminusDrupalUpstreamWeb = process.env.TERMINUS_UPSTREAMS_DRUPAL_WEB.trim().replace(envRegex, ""),
 terminusDrupalUpstreamRoot = process.env.TERMINUS_UPSTREAMS_DRUPAL_ROOT.trim().replace(envRegex, "");
 
+let domainCount = environmentCount = customURLCount = 0;
+
 
 /**
  * Get all sites associated with a tag
@@ -340,6 +342,8 @@ async function getAllSitesByType (obj)   {
                     );
                     console.log(`Adding Domain: ${entry[1].id}`);
 
+                    domainCount ++;
+
                 }
 
                 if ( undefined === entry[1].id ) {
@@ -371,6 +375,8 @@ async function getAllSitesByType (obj)   {
                         `{"urn": "${entry[1].domain}", "location": "${entry[1].domain}${upstreamLoginAppend}"}`
                     );
                     console.log(`Adding Environment: ${entry[1].domain}`);
+
+                    environmentCount ++;
                 }
             }
         }
@@ -412,6 +418,8 @@ async function getCustomURLs() {
                 `{"urn": "${url[1].urn}", "location": "${url[1].location}"}`
             );
             console.log(`Adding Custom URL: ${url[1].urn}`);
+
+            customURLCount ++;
         }
 
     }
@@ -474,6 +482,30 @@ async function allSitesToXML() {
     // Bring all the URLs together
     fullSiteList = fullSiteList.concat(wordpressTagRootFn, wordpressTagWebFn, wordpressUpstreamRootFn, wordpressUpstreamWebFn, drupalTagRootFn, drupalTagWebFn, drupalUpstreamRootFn, drupalUpstreamWebFn, getCustomURLsFn);
 
+    // Output some messaging for verification in github
+    let totalSiteCount = domainCount + environmentCount + customURLCount;
+    let xmlLines = (totalSiteCount * 5) + 3;
+    let siteCountsMessage = false;
+
+    if ( fullSiteList === totalSiteCount ) {
+        siteCountsMessage = true;
+    }
+
+    const build_message = `
+        Full Site List: ${fullSiteList.length}
+        Domains: ${domainCount}
+        Environments: ${environmentCount}
+        Custom URLS: ${customURLCount}
+        Match: ${siteCountsMessage}
+        Total XML Lines should be: ${xmlLines}
+    `;
+
+    try {
+        fs.writeFileSync('./build-message.txt', build_message);
+        // file written successfully
+    } catch (err) {
+        console.error(err);
+    }
 
     createSitesXML(fullSiteList);
 
