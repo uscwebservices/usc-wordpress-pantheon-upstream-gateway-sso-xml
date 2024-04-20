@@ -487,7 +487,7 @@ async function allSitesToXML() {
     let xmlLines = (totalSiteCount * 5) + 3;
     let siteCountsMessage = false;
 
-    if ( fullSiteList === totalSiteCount ) {
+    if ( fullSiteList.length === totalSiteCount ) {
         siteCountsMessage = true;
     }
 
@@ -496,9 +496,12 @@ async function allSitesToXML() {
         Domains: ${domainCount}
         Environments: ${environmentCount}
         Custom URLS: ${customURLCount}
+        Total Site Count: ${totalSiteCount}
         Match: ${siteCountsMessage}
         Total XML Lines should be: ${xmlLines}
     `;
+
+    console.log(build_message);
 
     try {
         fs.writeFileSync('./build-message.txt', build_message);
