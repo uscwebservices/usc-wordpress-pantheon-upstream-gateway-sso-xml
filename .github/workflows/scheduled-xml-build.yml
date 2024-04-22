@@ -75,14 +75,14 @@ jobs:
         run: node index.js
 
       - name: Read file contents
-        id: read_build_message
+        id: read_build
         uses: andstor/file-reader-action@v1
         with:
-          path: 'build-message.txt'
+          path: '$GITHUB_WORKSPACE/build-message.txt'
 
       - name: File contents
         run: echo 'build_message<<EOF' >> $GITHUB_ENV
-          echo "${ steps.read_build_message.outputs.contents }" >> $GITHUB_ENV
+          echo "${ steps.read_build.outputs.contents }" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
       - name: Create Pull Request
