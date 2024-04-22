@@ -503,13 +503,6 @@ async function allSitesToXML() {
 
     console.log(build_message);
 
-    try {
-        fs.writeFileSync('./build-message.txt', build_message);
-        // file written successfully
-    } catch (err) {
-        console.error(err);
-    }
-
     createSitesXML(fullSiteList);
 
 }
