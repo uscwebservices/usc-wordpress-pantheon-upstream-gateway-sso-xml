@@ -16,9 +16,13 @@ jobs:
       TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
       TERMINUS_ORG_ID: ${{ secrets.TERMINUS_ORG_ID }}
       TERMINUS_UPSTREAMS: ${{ secrets.TERMINUS_UPSTREAMS }}
+      TERMINUS_UPSTREAMS_WORDPRESS_WEB: ${{ secrets.TERMINUS_UPSTREAMS_WORDPRESS_WEB }}
+      TERMINUS_UPSTREAMS_WORDPRESS_ROOT: ${{ secrets.TERMINUS_UPSTREAMS_WORDPRESS_ROOT }}
+      TERMINUS_UPSTREAMS_DRUPAL_WEB: ${{ secrets.TERMINUS_UPSTREAMS_DRUPAL_WEB }}
+      TERMINUS_UPSTREAMS_DRUPAL_ROOT: ${{ secrets.TERMINUS_UPSTREAMS_DRUPAL_ROOT }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -37,7 +41,7 @@ jobs:
           git config user.email "<>"
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
@@ -70,8 +74,19 @@ jobs:
       - name: Get current sites
         run: node index.js
 
+      - name: Read file contents
+        id: read_build_message
+        uses: andstor/file-reader-action@v1
+        with:
+          path: 'build-message.txt'
+
+      - name: File contents
+        run: echo 'build_message<<EOF' >> $GITHUB_ENV
+          echo "${ steps.read_build_message.outputs.contents }" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.API_TOKEN_GITHUB }}
           base: main
@@ -83,7 +98,7 @@ jobs:
             automerge
           body: |
             Autoupdate to XML
-
+            ${{ env.build_message }}
             @uscwebservices/software-engineering-web
 
   automerge:
@@ -91,6 +106,6 @@ jobs:
     needs: [scheduled_xml]
     steps:
       - name: automerge
-        uses: 'pascalgn/automerge-action@v0.15.3'
+        uses: 'pascalgn/automerge-action@v0.16.3'
         env:
           GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}

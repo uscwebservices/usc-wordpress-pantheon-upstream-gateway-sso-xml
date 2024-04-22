@@ -3,7 +3,7 @@ name: Scheduled delete abandoned branches
 on:
   # Run daily at midnight
   schedule:
-    - cron: "0 15 * * 3"
+    - cron: '0 15 * * 3'
     ## At 15:00 (08:00 PST) on Wednesday
 
   # Allow workflow to be manually run from the GitHub UI
@@ -15,7 +15,7 @@ jobs:
     name: Satisfy my repo CDO
     steps:
       - name: Delete dead branches
-        uses: phpdocker-io/github-actions-delete-abandoned-branches@v1
+        uses: phpdocker-io/github-actions-delete-abandoned-branches@v2.0.3
         id: delete_stuff
         with:
           github_token: ${{ github.token }}
