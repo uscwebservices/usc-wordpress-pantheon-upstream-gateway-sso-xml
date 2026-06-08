@@ -22,7 +22,7 @@ jobs:
       TERMINUS_UPSTREAMS_DRUPAL_ROOT: ${{ secrets.TERMINUS_UPSTREAMS_DRUPAL_ROOT }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -41,9 +41,9 @@ jobs:
           git config user.email "<>"
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: latest
 
       - name: Install NPM
         run: npm ci
@@ -51,7 +51,7 @@ jobs:
       - name: Setup PHP with tools
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.4'
           tools: composer:v2
 
       - name: Set Oauth config for Github
@@ -65,6 +65,12 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install --prefer-dist
 
+      - name: Install Terminus
+        uses: pantheon-systems/terminus-github-actions@v1
+        with:
+          pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
+          disable-cache: 'true'
+
       - name: Export Path to Terminus
         run: echo "$GITHUB_WORKSPACE/vendor/pantheon-systems/terminus/bin" >> $GITHUB_PATH
 
@@ -75,7 +81,8 @@ jobs:
         run: node index.js
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+        id: cpr
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.API_TOKEN_GITHUB }}
           base: main
@@ -90,11 +97,8 @@ jobs:
 
             @uscwebservices/software-engineering-web
 
-  automerge:
-    runs-on: ubuntu-latest
-    needs: [scheduled_xml]
-    steps:
-      - name: automerge
-        uses: 'pascalgn/automerge-action@v0.16.3'
+      - name: Enable auto-merge
+        if: ${{ steps.cpr.outputs.pull-request-number }}
         env:
-          GITHUB_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
+          GH_TOKEN: ${{ secrets.API_TOKEN_GITHUB }}
+        run: gh pr merge --auto --merge --delete-branch "${{ steps.cpr.outputs.pull-request-number }}"
