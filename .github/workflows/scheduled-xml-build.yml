@@ -22,7 +22,7 @@ jobs:
       TERMINUS_UPSTREAMS_DRUPAL_ROOT: ${{ secrets.TERMINUS_UPSTREAMS_DRUPAL_ROOT }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
