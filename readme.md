@@ -76,3 +76,7 @@ npm ci
 composer install --prefer-dist
 node index.js
 ```
+
+## Automerge
+
+As of 2.1.0 - `pascalgn/automerge-action@v0.16.4` is stagnant on Node 20 and GitHub terminal commands are used to automerge.
