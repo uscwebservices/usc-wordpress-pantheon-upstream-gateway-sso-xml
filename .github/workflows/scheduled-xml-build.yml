@@ -51,7 +51,7 @@ jobs:
       - name: Setup PHP with tools
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '8.4'
           tools: composer:v2
 
       - name: Set Oauth config for Github
@@ -64,6 +64,12 @@ jobs:
 
       - name: Install Composer Dependencies
         run: composer install --prefer-dist
+
+      - name: Install Terminus
+        uses: pantheon-systems/terminus-github-actions@v1
+        with:
+          pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
+          disable-cache: 'true'
 
       - name: Export Path to Terminus
         run: echo "$GITHUB_WORKSPACE/vendor/pantheon-systems/terminus/bin" >> $GITHUB_PATH

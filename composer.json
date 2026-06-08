@@ -14,9 +14,6 @@
             "url": "https://wpackagist.org"
         }
     },
-    "require-dev": {
-        "pantheon-systems/terminus": "^2.5"
-    },
     "scripts": {
         "remove-git-submodules": "find . -mindepth 2 -type d -name .git | xargs rm -rf",
         "pre-install-cmd": [
